@@ -7,7 +7,7 @@ import React, {
   useMemo,
   useCallback,
 } from 'react';
-import PDFViewer from './PDFViewer';
+import { PDFViewer } from './PDFViewer';
 import PDFControls from './PDFControls';
 import PDFCard from './PDFCard';
 import { clampText } from '@/lib/utils/clamp';
