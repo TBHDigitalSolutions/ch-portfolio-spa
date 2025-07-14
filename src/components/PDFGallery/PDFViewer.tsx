@@ -1,4 +1,3 @@
-// src/components/PDFGallery/PDFViewer.tsx
 'use client';
 
 import React from 'react';
@@ -19,9 +18,8 @@ interface PDFViewerProps {
   onError?: (error: string) => void;
 }
 
-// Production-safe PDF.js worker (no dependency on local pdfjs-dist)
-const workerUrl =
-  'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+// Use CDN worker, no local pdfjs-dist
+const workerUrl = 'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
 
 const PDFViewer: React.FC<PDFViewerProps> = ({
   url,
