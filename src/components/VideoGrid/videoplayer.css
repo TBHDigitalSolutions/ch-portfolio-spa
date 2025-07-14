@@ -1,0 +1,172 @@
+/* src/components/VideoGrid/videoplayer.css */
+
+/* ---------------------------------
+   WRAPPER & FOCUS STATES
+   --------------------------------- */
+.video-player-wrapper {
+    cursor: pointer;
+    outline: none;
+}
+
+.video-player-wrapper:focus-visible {
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: var(--focus-outline-offset);
+}
+
+/* ---------------------------------
+     PLAYER CONTAINER
+     --------------------------------- */
+.video-player-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--background-dark);
+    border-radius: var(--player-border-radius);
+    overflow: hidden;
+}
+
+/* ---------------------------------
+     RESPONSIVE ASPECT-RATIO BOX
+     --------------------------------- */
+.video-player-responsive {
+    width: 100%;
+    /* aspect-ratio is set inline via React, but fallback for older browsers: */
+    position: relative;
+}
+
+.video-player-responsive::before {
+    content: "";
+    display: block;
+    padding-top: calc((9 / 16) * 100%);
+}
+
+.video-player-responsive>* {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ---------------------------------
+     INLINE VIDEO & EMBED STYLES
+     --------------------------------- */
+.video-player-iframe,
+.video-player-element {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: none;
+    border-radius: var(--player-border-radius);
+    object-fit: contain;
+    background: var(--background-dark);
+}
+
+/* ---------------------------------
+     LOADING OVERLAY
+     --------------------------------- */
+.video-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--overlay-backdrop);
+    pointer-events: none;
+    z-index: var(--z-index-modal);
+}
+
+.video-loading .loading-spinner {
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: var(--color-accent);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: video-spin 1s linear infinite;
+    margin-bottom: var(--spacing-sm);
+}
+
+.video-loading p,
+.video-loading small {
+    color: var(--color-off-white);
+    margin: var(--spacing-xs) 0;
+    text-align: center;
+}
+
+@keyframes video-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ---------------------------------
+     ERROR STATE
+     --------------------------------- */
+.video-player-error {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-medium);
+    color: var(--color-off-white);
+    padding: var(--spacing-md);
+    border-radius: var(--player-border-radius);
+    text-align: center;
+}
+
+.video-player-error p {
+    margin: var(--spacing-sm) 0 0;
+}
+
+/* ---------------------------------
+     FULL-SCREEN MODAL
+     --------------------------------- */
+.video-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: var(--overlay-backdrop);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-index-modal);
+}
+
+.video-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    background: var(--background-dark);
+    border-radius: var(--player-border-radius);
+    overflow: hidden;
+}
+
+.video-modal-player {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    background: var(--background-dark);
+}
+
+/* CLOSE BUTTON */
+.video-modal-close {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background: transparent;
+    border: none;
+    color: var(--color-off-white);
+    font-size: var(--font-size-h3);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+}
+
+.video-modal-close:focus-visible {
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: var(--focus-outline-offset);
+    border-radius: var(--radius-sm);
+}

@@ -1,0 +1,42 @@
+{
+    "sectionTitle": "Video Content Showcase",
+    "description": [
+      "This comprehensive video section contains various corporate videos and creative projects organized by category. These pieces demonstrate my range in video production, from polished corporate communications to experimental creative content, showing both technical expertise and creative vision."
+    ],
+    "categories": [
+      {
+        "title": "Corporate Category",
+        "items": [
+          "Professional production quality for business communications",
+          "Technical expertise in industrial and manufacturing content",
+          "Trade show and marketing video capabilities",
+          "Brand consistency across different corporate projects"
+        ]
+      },
+      {
+        "title": "Creative Category",
+        "items": [
+          "Artistic vision and experimental techniques",
+          "Storytelling abilities across different genres",
+          "Personal project development and creative freedom",
+          "Genre versatility from music videos to documentaries"
+        ]
+      },
+      {
+        "title": "Comedy Category",
+        "items": [
+          "Entertainment value and audience engagement",
+          "Comedic timing and editing for humor",
+          "Character development and narrative comedy",
+          "Social media optimization for shareable content"
+        ]
+      }
+    ],
+    "finalInfo": [
+      {
+        "label": "Purpose",
+        "value": "To demonstrate versatility in video production while showing both commercial viability and creative passion."
+      }
+    ]
+  }
+   

@@ -1,0 +1,151 @@
+/* src/components/About/title.css */
+
+/* ============================
+   📝 CONDENSED ABOUT TITLE COMPONENT
+   Clean typography with minimal spacing
+   UPDATED: Removed overlays, hover effects, and condensed spacing
+============================ */
+
+/* Title wrapper with minimal positioning */
+.about-title-wrapper {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* Clean title styling with gradient text */
+.about-title-heading {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h1);
+    font-weight: 700;
+    color: var(--primary-text);
+    margin: 0 auto;
+    position: relative;
+    line-height: var(--line-height-h2);
+
+    /* Simple gradient text effect */
+    background: linear-gradient(135deg,
+            var(--color-soft-black) 0%,
+            var(--color-accent) 50%,
+            var(--color-soft-black) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Simple decorative underline */
+.about-title-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg,
+            var(--color-accent-light) 0%,
+            var(--color-accent) 50%,
+            var(--color-accent-light) 100%);
+    border-radius: var(--radius-sm);
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 1024px) {
+    .about-title-heading {
+        font-size: var(--font-size-h3);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .about-title-heading::after {
+        width: 70px;
+        bottom: -6px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-title-heading {
+        font-size: var(--font-size-h4);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .about-title-heading::after {
+        width: 60px;
+        height: 2px;
+        bottom: -6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-title-heading {
+        font-size: var(--font-size-h5);
+        margin-bottom: var(--spacing-xs);
+        line-height: var(--line-height-h5);
+    }
+
+    .about-title-heading::after {
+        width: 50px;
+        height: 2px;
+        bottom: -4px;
+    }
+}
+
+/* === ACCESSIBILITY & PREFERENCES === */
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .about-title-heading {
+        background: var(--color-soft-black);
+        -webkit-background-clip: unset;
+        -webkit-text-fill-color: unset;
+        background-clip: unset;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .about-title-heading {
+        background: var(--color-soft-black);
+        -webkit-background-clip: unset;
+        -webkit-text-fill-color: var(--color-soft-black);
+        background-clip: unset;
+    }
+
+    .about-title-heading::after {
+        background: var(--color-soft-black);
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .about-title-heading {
+        background: linear-gradient(135deg,
+                var(--color-soft-black) 0%,
+                var(--color-accent-medium) 50%,
+                var(--color-soft-black) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .about-title-heading::after {
+        background: linear-gradient(90deg,
+                var(--color-accent-medium) 0%,
+                var(--color-accent) 50%,
+                var(--color-accent-medium) 100%);
+    }
+}
+
+/* Print styles */
+@media print {
+    .about-title-heading {
+        background: var(--color-soft-black);
+        -webkit-background-clip: unset;
+        -webkit-text-fill-color: var(--color-soft-black);
+        background-clip: unset;
+    }
+
+    .about-title-heading::after {
+        background: var(--color-soft-black);
+    }
+}

@@ -1,0 +1,380 @@
+/* src/components/About/aboutskills.css */
+
+/* ============================
+   🛠️ SKILLS SECTION - ONE LINE FORMAT
+   Compact single card with "skill : description" format
+   UPDATED: Each skill on one line with tight spacing
+============================ */
+
+/* Container wrapper */
+.about-skills {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    height: 100%;
+    /* Match parent height */
+}
+
+/* Single card container with full height */
+.skills-card {
+    background: var(--background-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    transition: all var(--transition-default);
+    position: relative;
+    box-shadow: var(--shadow-md);
+    height: 100%;
+    /* Full height to match About container */
+    display: flex;
+    flex-direction: column;
+
+    /* Entry animation */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: skillsCardFadeIn 0.6s ease-out 0.2s forwards;
+}
+
+.skills-card:hover {
+    transform: var(--translate-y-sm);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-accent-light);
+}
+
+/* Skills title with tight spacing */
+.skills-title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h6);
+    font-weight: 600;
+    color: var(--primary-text);
+    margin: 0 0 var(--spacing-sm) 0;
+    text-align: center;
+    position: relative;
+    flex-shrink: 0;
+    /* Don't shrink */
+}
+
+/* Compact title underline */
+.skills-title::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 2px;
+    background: var(--color-accent);
+    border-radius: var(--radius-sm);
+}
+
+/* Skills list container with flex grow */
+.skills-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    flex: 1;
+    /* Take remaining space */
+}
+
+/* One-line skill item */
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs);
+    transition: all var(--transition-default);
+    border-radius: var(--radius-sm);
+    position: relative;
+    flex-shrink: 0;
+    /* Don't shrink items */
+}
+
+.skill-item:hover {
+    background: rgba(14, 175, 251, 0.05);
+}
+
+/* Bullet point */
+.skill-bullet {
+    color: var(--color-accent);
+    font-weight: bold;
+    font-size: var(--font-size-caption);
+    flex-shrink: 0;
+    width: 8px;
+    /* Fixed width for alignment */
+}
+
+/* One-line skill content */
+.skill-content {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* One-line skill text with "skill : description" format */
+.skill-text {
+    font-family: var(--font-body);
+    font-size: var(--font-size-caption);
+    color: var(--secondary-text);
+    line-height: var(--line-height-small);
+    margin: 0;
+    transition: color var(--transition-default);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.skill-item:hover .skill-text {
+    color: var(--primary-text);
+}
+
+/* Skill label styling within the text */
+.skill-label-inline {
+    font-weight: 600;
+    color: var(--primary-text);
+    transition: color var(--transition-default);
+}
+
+.skill-item:hover .skill-label-inline {
+    color: var(--color-accent-hover);
+}
+
+/* Colon separator styling */
+.skill-separator {
+    color: var(--color-accent);
+    margin: 0 0.3em;
+    font-weight: 500;
+}
+
+/* Animation for the card */
+@keyframes skillsCardFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced focus states for accessibility */
+.skill-item:focus {
+    outline: none;
+    background: rgba(14, 175, 251, 0.1);
+    border-radius: var(--radius-sm);
+}
+
+.skill-item:focus-visible {
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: var(--focus-outline-offset);
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 1024px) {
+    .skills-card {
+        padding: var(--spacing-sm);
+        height: auto;
+        /* Auto height on smaller screens */
+    }
+
+    .skills-title {
+        font-size: var(--font-size-small);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .skills-title::after {
+        width: 25px;
+        height: 1px;
+        bottom: -3px;
+    }
+
+    .skills-list {
+        gap: var(--spacing-xs);
+    }
+
+    .skill-text {
+        font-size: var(--font-size-xsm);
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-card {
+        padding: var(--spacing-sm);
+        border-radius: var(--radius-md);
+        height: auto;
+    }
+
+    .skills-title {
+        font-size: var(--font-size-caption);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .skills-title::after {
+        width: 20px;
+        height: 1px;
+        bottom: -2px;
+    }
+
+    .skill-item {
+        padding: var(--spacing-xs) var(--spacing-xs);
+    }
+}
+
+@media (max-width: 480px) {
+    .skills-card {
+        padding: var(--spacing-xs);
+        border-radius: var(--radius-sm);
+    }
+
+    .skills-title {
+        font-size: var(--font-size-caption);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .skills-title::after {
+        width: 15px;
+        height: 1px;
+        bottom: -2px;
+    }
+
+    .skill-item {
+        gap: var(--spacing-xs);
+        padding: var(--spacing-xs);
+    }
+
+    .skill-text {
+        font-size: var(--font-size-xsm);
+    }
+
+    .skill-separator {
+        margin: 0 0.2em;
+    }
+}
+
+/* === ACCESSIBILITY & PREFERENCES === */
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .skills-card {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .skills-card:hover,
+    .skill-item:hover {
+        transform: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .skills-card {
+        background: var(--background-card);
+        border: 2px solid var(--primary-text);
+    }
+
+    .skills-card:hover {
+        border-color: var(--color-accent);
+        box-shadow: var(--shadow-sm);
+        transform: none;
+    }
+
+    .skills-title::after {
+        background: var(--primary-text);
+    }
+
+    .skill-bullet {
+        color: var(--primary-text);
+    }
+
+    .skill-separator {
+        color: var(--primary-text);
+    }
+
+    .skill-item:hover {
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-item:focus-visible {
+        outline: 3px solid var(--primary-text);
+        outline-offset: 2px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .skills-card {
+        background: var(--background-card-dark);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: var(--shadow-dark-md);
+    }
+
+    .skills-card:hover {
+        border-color: var(--color-accent-medium);
+        box-shadow: var(--shadow-dark-lg);
+    }
+
+    .skills-title::after {
+        background: var(--color-accent-medium);
+    }
+
+    .skill-bullet {
+        color: var(--color-accent-medium);
+    }
+
+    .skill-separator {
+        color: var(--color-accent-medium);
+    }
+
+    .skill-item:hover {
+        background: rgba(14, 175, 251, 0.08);
+    }
+}
+
+/* Print styles */
+@media print {
+    .skills-card {
+        background: white;
+        border: 1px solid #333;
+        box-shadow: none;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        padding: var(--spacing-xs);
+        transform: none;
+        animation: none;
+        opacity: 1;
+        height: auto;
+    }
+
+    .skills-title {
+        color: #333;
+        font-size: var(--font-size-caption);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .skills-title::after {
+        background: #333;
+    }
+
+    .skill-bullet {
+        color: #333;
+    }
+
+    .skill-separator {
+        color: #333;
+    }
+
+    .skill-text {
+        font-size: var(--font-size-xsm);
+        color: #666;
+    }
+
+    .skill-label-inline {
+        color: #333;
+    }
+
+    .skill-item:hover {
+        background: none;
+    }
+}

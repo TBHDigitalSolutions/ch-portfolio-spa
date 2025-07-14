@@ -1,0 +1,325 @@
+/* src/components/About/aboutsection.css */
+
+/* ============================
+   📖 ENHANCED ABOUT SECTION - 50/50 LAYOUT
+   Equal height and width containers with tight spacing
+   UPDATED: 50/50 split with consistent heights
+============================ */
+
+/* Standard section wrapper */
+.about-section {
+    scroll-margin-top: var(--header-height);
+    padding: var(--section-padding-md) 0;
+    position: relative;
+    z-index: var(--z-index-base);
+}
+
+/* Standard container following SPA patterns */
+.about-section-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding-md);
+    position: relative;
+}
+
+/* Standard section title styling */
+.about-section .section-title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h2);
+    font-weight: 700;
+    color: var(--primary-text);
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+
+    /* Gradient text effect like other sections */
+    background: linear-gradient(135deg,
+            var(--color-soft-black) 0%,
+            var(--color-accent) 50%,
+            var(--color-soft-black) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Standard section title underline */
+.about-section .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg,
+            var(--color-accent-light) 0%,
+            var(--color-accent) 50%,
+            var(--color-accent-light) 100%);
+    border-radius: var(--radius-sm);
+}
+
+/* Content wrapper with tight spacing */
+.about-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    position: relative;
+    z-index: 2;
+}
+
+/* Equal height 50/50 layout for larger screens */
+@media (min-width: 1024px) {
+    .about-main-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        /* Equal 50/50 split */
+        gap: var(--spacing-lg);
+        align-items: stretch;
+        /* Equal heights */
+        position: relative;
+        min-height: 400px;
+        /* Minimum height for consistency */
+    }
+
+    .about-intro-column {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        /* Full height of container */
+    }
+
+    .about-skills-column {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        /* Full height of container */
+    }
+
+    /* Vertical divider between About and Skills */
+    .about-skills-divider {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 100%;
+        background: linear-gradient(to bottom,
+                transparent 0%,
+                var(--color-accent-light) 20%,
+                var(--color-accent) 50%,
+                var(--color-accent-light) 80%,
+                transparent 100%);
+        z-index: 1;
+    }
+}
+
+/* Mobile layout - stack vertically with horizontal divider */
+@media (max-width: 1023px) {
+    .about-main-content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .about-intro-column {
+        order: 1;
+    }
+
+    .about-skills-column {
+        order: 3;
+    }
+
+    /* Horizontal divider for mobile */
+    .about-skills-divider {
+        order: 2;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(to right,
+                transparent 0%,
+                var(--color-accent-light) 20%,
+                var(--color-accent) 50%,
+                var(--color-accent-light) 80%,
+                transparent 100%);
+        margin: var(--spacing-sm) 0;
+    }
+}
+
+/* Contact section moved to top with tight spacing */
+.about-contact-section {
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    justify-content: center;
+}
+
+/* Enhanced divider styling consistent with other sections */
+.about-section .section-divider {
+    margin: var(--spacing-sm) 0;
+    position: relative;
+    z-index: 2;
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 1024px) {
+    .about-section {
+        padding: var(--section-padding-sm) 0;
+    }
+
+    .about-content-wrapper {
+        gap: var(--spacing-sm);
+    }
+
+    .about-section .section-title {
+        font-size: var(--font-size-h3);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .about-section .section-title::after {
+        width: 50px;
+        height: 2px;
+        bottom: -6px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-section {
+        padding: var(--section-padding-xs) 0;
+    }
+
+    .about-content-wrapper {
+        gap: var(--spacing-xs);
+    }
+
+    .about-section .section-title {
+        font-size: var(--font-size-h4);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .about-section .section-title::after {
+        width: 40px;
+        height: 2px;
+        bottom: -4px;
+    }
+
+    .about-section .section-divider {
+        margin: var(--spacing-xs) 0;
+    }
+
+    .about-contact-section {
+        margin-bottom: var(--spacing-xs);
+    }
+}
+
+@media (max-width: 480px) {
+    .about-section {
+        padding: var(--section-padding-xs) 0;
+    }
+
+    .about-content-wrapper {
+        gap: var(--spacing-xs);
+    }
+
+    .about-section .section-title {
+        font-size: var(--font-size-h5);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .about-section .section-title::after {
+        width: 30px;
+        height: 1px;
+        bottom: -3px;
+    }
+
+    .about-section .section-divider {
+        margin: var(--spacing-xs) 0;
+    }
+
+    .about-contact-section {
+        margin-bottom: var(--spacing-xs);
+    }
+}
+
+/* === ACCESSIBILITY & PREFERENCES === */
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .about-section .section-title {
+        background: var(--primary-text);
+        -webkit-background-clip: unset;
+        -webkit-text-fill-color: var(--primary-text);
+        background-clip: unset;
+    }
+
+    .about-section .section-title::after {
+        background: var(--primary-text);
+    }
+
+    .about-contact-section {
+        border-top-color: var(--primary-text);
+    }
+}
+
+/* Dark mode support for divider */
+@media (prefers-color-scheme: dark) {
+    .about-section .section-title {
+        background: linear-gradient(135deg,
+                var(--color-soft-black) 0%,
+                var(--color-accent-medium) 50%,
+                var(--color-soft-black) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .about-section .section-title::after {
+        background: linear-gradient(90deg,
+                var(--color-accent-medium) 0%,
+                var(--color-accent) 50%,
+                var(--color-accent-medium) 100%);
+    }
+
+    .about-contact-section {
+        border-top-color: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Dark mode divider */
+    .about-skills-divider {
+        background: linear-gradient(to bottom,
+                transparent 0%,
+                var(--color-accent-medium) 20%,
+                var(--color-accent) 50%,
+                var(--color-accent-medium) 80%,
+                transparent 100%);
+    }
+
+    @media (max-width: 1023px) {
+        .about-skills-divider {
+            background: linear-gradient(to right,
+                    transparent 0%,
+                    var(--color-accent-medium) 20%,
+                    var(--color-accent) 50%,
+                    var(--color-accent-medium) 80%,
+                    transparent 100%);
+        }
+    }
+}
+
+/* Print styles */
+@media print {
+    .about-section .section-title {
+        background: var(--primary-text);
+        -webkit-background-clip: unset;
+        -webkit-text-fill-color: var(--primary-text);
+        background-clip: unset;
+    }
+
+    .about-section .section-title::after {
+        background: var(--primary-text);
+    }
+
+    .about-contact-section {
+        border-top-color: var(--primary-text);
+    }
+
+    .about-content-wrapper {
+        gap: var(--spacing-sm);
+    }
+}

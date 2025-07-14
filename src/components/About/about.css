@@ -1,0 +1,219 @@
+/* src/components/About/about.css */
+
+/* ============================
+   📖 ENHANCED ABOUT INTRO SECTION
+   Single container with tighter spacing to match Skills height
+   UPDATED: Reduced spacing for compact appearance
+============================ */
+
+/* Container wrapper */
+.about-container {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    /* Match parent height */
+}
+
+/* Single intro card container with full height */
+.about-intro {
+    max-width: 75ch;
+    /* Prose width for optimal reading */
+    margin: 0 auto;
+    padding: var(--spacing-md);
+    background: var(--background-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all var(--transition-default);
+    position: relative;
+    box-shadow: var(--shadow-md);
+    height: 100%;
+    /* Full height to match Skills container */
+    display: flex;
+    flex-direction: column;
+
+    /* Entry animation */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: introFadeIn 0.6s ease-out 0.1s forwards;
+}
+
+/* Subtle left accent border for the entire container */
+.about-intro::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--color-accent);
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    opacity: 0.6;
+    transition: opacity var(--transition-default);
+}
+
+/* Enhanced hover effects for the entire container */
+.about-intro:hover {
+    background: var(--background-light);
+    transform: var(--translate-y-sm);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-accent-light);
+}
+
+.about-intro:hover::before {
+    opacity: 1;
+}
+
+/* Paragraph styling within the container with tight spacing */
+.about-paragraph {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+    color: var(--secondary-text);
+    margin: 0 0 var(--spacing-sm) 0;
+    /* Reduced margin */
+    position: relative;
+    z-index: 2;
+}
+
+/* Remove margin from last paragraph */
+.about-paragraph:last-child {
+    margin-bottom: 0;
+}
+
+/* Enhanced typography */
+.about-paragraph strong {
+    color: var(--primary-text);
+    font-weight: 600;
+}
+
+.about-paragraph em {
+    color: var(--color-accent);
+    font-style: normal;
+    font-weight: 500;
+}
+
+/* Container fade-in animation */
+@keyframes introFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 1024px) {
+    .about-intro {
+        max-width: 85ch;
+        padding: var(--spacing-sm) var(--spacing-md);
+        height: auto;
+        /* Auto height on smaller screens */
+    }
+
+    .about-paragraph {
+        font-size: var(--font-size-small);
+        margin-bottom: var(--spacing-xs);
+    }
+}
+
+@media (max-width: 768px) {
+    .about-intro {
+        max-width: 100%;
+        padding: var(--spacing-sm);
+        border-radius: var(--radius-md);
+        height: auto;
+    }
+
+    .about-paragraph {
+        margin-bottom: var(--spacing-xs);
+    }
+}
+
+@media (max-width: 480px) {
+    .about-intro {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border-radius: var(--radius-sm);
+    }
+
+    .about-paragraph {
+        font-size: var(--font-size-small);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .about-intro::before {
+        width: 3px;
+    }
+}
+
+/* === ACCESSIBILITY & PREFERENCES === */
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .about-intro {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .about-intro:hover {
+        transform: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .about-intro {
+        background: var(--background-card);
+        border: 2px solid var(--primary-text);
+    }
+
+    .about-intro::before {
+        background: var(--primary-text);
+    }
+
+    .about-intro:hover {
+        border-color: var(--color-accent);
+        box-shadow: var(--shadow-sm);
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .about-intro {
+        background: var(--background-card-dark);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: var(--shadow-dark-md);
+    }
+
+    .about-intro:hover {
+        background: rgba(255, 255, 255, 0.03);
+        border-color: var(--color-accent-medium);
+        box-shadow: var(--shadow-dark-lg);
+    }
+
+    .about-intro::before {
+        background: var(--color-accent-medium);
+    }
+}
+
+/* Print styles */
+@media print {
+    .about-intro {
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: none;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        padding: var(--spacing-sm);
+        animation: none;
+        opacity: 1;
+        transform: none;
+        height: auto;
+    }
+
+    .about-intro::before {
+        display: none;
+    }
+
+    .about-paragraph {
+        margin-bottom: var(--spacing-xs);
+    }
+}

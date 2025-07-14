@@ -1,0 +1,180 @@
+/* src/styles/_fonts.css */
+/* ============================
+   🎨 TBH Digital Solutions Fonts
+   Shared Font Declarations
+============================ */
+
+/* 🔤 Aldrich (Primary Heading) */
+@font-face {
+  font-family: "Aldrich";
+  src: url("/fonts/aldrich/aldrich-regular-webfont.woff2") format("woff2"),
+    url("/fonts/aldrich/aldrich-regular-webfont.woff") format("woff"),
+    url("/fonts/aldrich/Aldrich-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 🔤 Sovjet Box Bold (Logo / Branding) */
+@font-face {
+  font-family: "Sovjet Box";
+  src: url("/fonts/sovjet/sovjetboxbd_v0_9-webfont.woff") format("woff"),
+    url("/fonts/sovjet/SovjetBoxBd_v0_9.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 🔤 Sovjet Box Small Caps (Alternative Branding) */
+@font-face {
+  font-family: "Sovjet Box SC";
+  src: url("/fonts/sovjet/sovjetboxsc_v0_9-webfont.woff") format("woff"),
+    url("/fonts/sovjet/SovjetBoxSC_v0_9.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 🔤 Newsreader Variable Fonts (Primary Option) */
+@font-face {
+  font-family: "Newsreader Variable";
+  src: url("/fonts/Newsreader/Newsreader-VariableFont_opsz,wght.ttf") format("truetype-variations");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Newsreader Variable";
+  src: url("/fonts/Newsreader/Newsreader-Italic-VariableFont_opsz,wght.ttf") format("truetype-variations");
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* 🔤 Newsreader Static Fonts (Fallback) */
+
+/* Regular (400) */
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader/static/Newsreader_14pt-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader/static/Newsreader_14pt-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Medium (500) */
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader/static/Newsreader_14pt-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader/static/Newsreader_14pt-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* SemiBold (600) */
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader/static/Newsreader_14pt-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader/static/Newsreader_14pt-SemiBoldItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Bold (700) */
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader/static/Newsreader_14pt-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader/static/Newsreader_14pt-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Light (300) - Optional */
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader/static/Newsreader_14pt-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader/static/Newsreader_14pt-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ============================
+   🎯 Font Family Utilities
+   CSS Custom Properties for consistent usage
+============================ */
+
+:root {
+  /* Primary font families */
+  --font-aldrich: "Aldrich", "Arial Black", Arial, sans-serif;
+  --font-sovjet: "Sovjet Box", "Impact", "Arial Black", Arial, sans-serif;
+  --font-sovjet-sc: "Sovjet Box SC", "Impact", "Arial Black", Arial, sans-serif;
+  --font-newsreader: "Newsreader Variable", "Newsreader", "Georgia", "Times New Roman", serif;
+  --font-newsreader-static: "Newsreader", "Georgia", "Times New Roman", serif;
+
+  /* Semantic font assignments */
+  --font-heading-primary: var(--font-aldrich);
+  --font-heading-brand: var(--font-sovjet);
+  --font-body: var(--font-newsreader);
+  --font-serif: var(--font-newsreader-static);
+}
+
+/* ============================
+   🎨 Font Feature Settings
+   Enhanced typography features
+============================ */
+
+.font-newsreader {
+  font-family: var(--font-newsreader);
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+}
+
+.font-aldrich {
+  font-family: var(--font-aldrich);
+  font-feature-settings: "kern" 1;
+}
+
+.font-sovjet {
+  font-family: var(--font-sovjet);
+  font-feature-settings: "kern" 1;
+}

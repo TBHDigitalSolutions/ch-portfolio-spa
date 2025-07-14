@@ -1,0 +1,243 @@
+/* src/components/About/aboutcontact.css */
+
+/* ============================
+   📞 ENHANCED CONTACT SECTION - NO HEADING
+   Clean button-only layout with consistent SPA styling
+   UPDATED: Removed heading, focused on button presentation
+============================ */
+
+/* Clean contact container without heading */
+.about-contact {
+    background: var(--background-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin: 0;
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-default);
+}
+
+.about-contact:hover {
+    box-shadow: var(--shadow-md);
+}
+
+/* Button container - now the primary content */
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+}
+
+/* Base button styling consistent with other CTAs */
+.contact-button {
+    font-family: var(--font-body);
+    font-size: var(--font-size-small);
+    font-weight: 500;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: all var(--transition-default);
+    position: relative;
+    cursor: pointer;
+    border: 1px solid transparent;
+    min-width: 120px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.contact-button span {
+    position: relative;
+    z-index: 2;
+}
+
+/* Primary button (Email) - Matching other primary CTAs */
+.contact-primary {
+    background: var(--color-accent);
+    color: var(--color-off-white);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-sm);
+}
+
+.contact-primary:hover,
+.contact-primary:focus {
+    background: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
+    transform: var(--translate-y-sm);
+    box-shadow: var(--shadow-md);
+}
+
+/* Secondary buttons - Matching other secondary CTAs */
+.contact-secondary {
+    background: var(--background-light);
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-sm);
+}
+
+.contact-secondary:hover,
+.contact-secondary:focus {
+    background: var(--color-accent-light);
+    color: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
+    transform: var(--translate-y-sm);
+    box-shadow: var(--shadow-md);
+}
+
+/* Enhanced focus states for accessibility */
+.contact-button:focus {
+    outline: none;
+}
+
+.contact-button:focus-visible {
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: var(--focus-outline-offset);
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+    .about-contact {
+        padding: var(--spacing-sm);
+        border-radius: var(--radius-sm);
+    }
+
+    .contact-buttons {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .contact-button {
+        width: 100%;
+        max-width: 240px;
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: var(--font-size-caption);
+    }
+}
+
+@media (max-width: 480px) {
+    .about-contact {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border-radius: var(--radius-xs);
+    }
+
+    .contact-button {
+        max-width: 200px;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-xsm);
+        min-width: 0;
+    }
+
+    /* Disable hover transforms on mobile */
+    .contact-button:hover,
+    .contact-button:focus {
+        transform: none;
+    }
+}
+
+/* === ACCESSIBILITY & PREFERENCES === */
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+    .contact-button:hover,
+    .contact-button:focus {
+        transform: none;
+    }
+
+    .about-contact:hover {
+        transform: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .about-contact {
+        background: var(--background-card);
+        border: 2px solid var(--primary-text);
+    }
+
+    .contact-primary {
+        background: var(--color-accent);
+        border: 2px solid var(--primary-text);
+        color: var(--color-off-white);
+    }
+
+    .contact-secondary {
+        background: var(--color-off-white);
+        border: 2px solid var(--color-accent);
+        color: var(--color-accent);
+    }
+
+    .contact-button:focus-visible {
+        outline: 3px solid var(--primary-text);
+        outline-offset: 2px;
+    }
+
+    .contact-button:hover {
+        transform: none;
+        box-shadow: var(--shadow-sm);
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .about-contact {
+        background: var(--background-card-dark);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: var(--shadow-dark-sm);
+    }
+
+    .about-contact:hover {
+        box-shadow: var(--shadow-dark-md);
+    }
+
+    .contact-primary {
+        background: var(--color-accent-medium);
+        border-color: var(--color-accent-medium);
+    }
+
+    .contact-primary:hover,
+    .contact-primary:focus {
+        background: var(--color-accent);
+        border-color: var(--color-accent);
+    }
+
+    .contact-secondary {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--color-accent);
+        border-color: var(--color-accent-medium);
+    }
+
+    .contact-secondary:hover,
+    .contact-secondary:focus {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--color-accent-hover);
+        border-color: var(--color-accent);
+    }
+}
+
+/* Print styles */
+@media print {
+    .about-contact {
+        background: var(--background-card);
+        box-shadow: none;
+        border: 1px solid var(--color-accent);
+        break-inside: avoid;
+        padding: var(--spacing-xs);
+    }
+
+    .contact-button {
+        background: var(--background-card);
+        color: var(--color-accent);
+        border: 1px solid var(--color-accent);
+        box-shadow: none;
+        transform: none;
+        page-break-inside: avoid;
+    }
+}

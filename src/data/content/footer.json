@@ -1,0 +1,37 @@
+{
+    "copyright": {
+      "text": "© {year} Conor Hovis Portfolio. All rights reserved."
+    },
+    "socialLinks": [
+      {
+        "type": "email",
+        "text": "Email",
+        "url": "mailto:conorhovis1@gmail.com",
+        "ariaLabel": "Send email to Conor Hovis"
+      },
+      {
+        "type": "linkedin",
+        "text": "LinkedIn",
+        "url": "https://linkedin.com/in/conorhovis",
+        "ariaLabel": "LinkedIn profile"
+      },
+      {
+        "type": "github",
+        "text": "GitHub",
+        "url": "https://github.com/conorhovis",
+        "ariaLabel": "GitHub profile"
+      }
+    ],
+    "backToTop": {
+      "text": "↑ Back to Top",
+      "href": "#top",
+      "ariaLabel": "Back to top"
+    },
+    "poweredBy": {
+      "text": "Powered by TBHDigitalSolutions",
+      "logoPath": "/images/tbhdigitalsolutions-logo.png",
+      "logoAlt": "TBHDigitalSolutions Logo",
+      "url": "https://tbhdigitalsolutions.com"
+    }
+  }
+  

@@ -1,0 +1,505 @@
+/* src/app/globals.css - Updated with TBH Root Variables - Navigation CSS Removed */
+
+@import '../styles/root.css';
+@import "../styles/_fonts.css";
+/* TBH Variables first */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =================================
+   PORTFOLIO-SPECIFIC OVERRIDES
+   Map existing variables to new TBH system
+   ================================= */
+@layer base {
+  :root {
+    /* Map old variables to new TBH variables for backward compatibility */
+    --color-bg: var(--background-card);
+    --color-fg: var(--primary-text);
+    --color-primary: var(--color-accent);
+    --color-primary-hover: var(--color-accent-hover);
+    --color-primary-light: var(--color-accent-light);
+    --color-secondary: var(--color-brand-gradient-primary);
+    --color-secondary-hover: var(--color-accent-hover);
+    --color-muted: var(--muted-text);
+
+    /* Keep existing semantic colors but enhance with TBH system */
+    --color-error: var(--color-danger);
+    --color-warning: var(--color-warning);
+    --color-info: var(--color-info);
+
+    /* Enhanced gray scale using TBH naming */
+    --color-gray-50: var(--background-light);
+    --color-gray-100: var(--background-light-2);
+    --color-gray-200: var(--color-light-grey);
+    --color-gray-300: var(--color-light-grey);
+    --color-gray-400: var(--secondary-text);
+    --color-gray-500: var(--muted-text);
+    --color-gray-600: var(--secondary-text);
+    --color-gray-700: var(--color-dark-charcoal);
+    --color-gray-800: var(--background-medium);
+    --color-gray-900: var(--color-soft-black);
+
+    /* Blue scale mapped to TBH accent system */
+    --color-blue-50: var(--color-accent-light);
+    --color-blue-100: var(--color-accent-medium);
+    --color-blue-500: var(--color-accent);
+    --color-blue-600: var(--color-accent-hover);
+    --color-blue-900: var(--color-soft-black);
+
+    /* Typography system enhanced */
+    --font-sans: var(--font-body);
+    --font-mono: "ui-monospace", var(--font-body);
+
+    /* Enhanced shadows using TBH system */
+    --shadow-sm: var(--shadow-sm);
+    --shadow-md: var(--shadow-md);
+    --shadow-lg: var(--shadow-lg);
+    --shadow-xl: var(--shadow-xl);
+
+    /* Enhanced border radius using TBH system */
+    --radius-sm: var(--radius-sm);
+    --radius-md: var(--radius-md);
+    --radius-lg: var(--radius-lg);
+    --radius-xl: var(--radius-xl);
+
+    /* Enhanced transitions using TBH system */
+    --transition: var(--transition-default);
+    --transition-fast: var(--transition-fast);
+    --transition-slow: var(--transition-slow);
+
+    /* Enhanced z-index using TBH system */
+    --z-dropdown: var(--z-index-dropdown);
+    --z-sticky: var(--z-index-high);
+    --z-fixed: var(--z-index-navigation);
+    --z-modal-backdrop: var(--z-index-modal);
+    --z-modal: var(--z-index-modal);
+    --z-popover: var(--z-index-dropdown);
+    --z-tooltip: var(--z-index-tooltip);
+    --z-toast: var(--z-index-tooltip);
+
+    /* Border color variable */
+    --border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  /* Enhanced Dark Mode using TBH system */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: var(--background-card-dark);
+      --color-fg: var(--primary-text);
+      --color-primary: var(--color-accent);
+      --color-primary-hover: var(--color-accent-hover);
+      --color-primary-light: var(--color-accent-light);
+      --color-secondary: var(--color-brand-gradient-primary);
+      --color-secondary-hover: var(--color-accent-hover);
+      --color-muted: var(--muted-text);
+
+      /* Dark mode gray scale */
+      --color-gray-50: var(--background-dark);
+      --color-gray-100: var(--background-medium);
+      --color-gray-200: var(--color-dark-charcoal);
+      --color-gray-300: var(--secondary-text);
+      --color-gray-400: var(--muted-text);
+      --color-gray-500: var(--color-light-grey);
+      --color-gray-600: var(--color-off-white);
+      --color-gray-700: var(--color-off-white);
+      --color-gray-800: var(--color-off-white);
+      --color-gray-900: var(--color-off-white);
+
+      /* Dark mode blue scale */
+      --color-blue-50: var(--background-dark);
+      --color-blue-100: var(--background-medium);
+      --color-blue-500: var(--color-accent);
+      --color-blue-600: var(--color-accent-hover);
+      --color-blue-900: var(--color-off-white);
+
+      /* Dark mode border color */
+      --border-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  /* =================================
+     ENHANCED BASE STYLES WITH TBH SYSTEM
+     ================================= */
+
+  /* Box Model & Scrolling Enhanced */
+  html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-height);
+    background: var(--background);
+    color: var(--primary-text);
+    font-family: var(--font-body);
+    line-height: var(--line-height-body);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--background);
+    color: var(--primary-text);
+    transition: background var(--transition-default), color var(--transition-default);
+    font-family: var(--font-body);
+    line-height: var(--line-height-body);
+  }
+
+  
+
+  /* =================================
+     ENHANCED INTERACTIVE ELEMENTS
+     ================================= */
+
+  /* Links Enhanced */
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: var(--transition-fast);
+    border-radius: var(--radius-sm);
+    position: relative;
+  }
+
+  a:hover {
+    color: var(--color-accent-hover);
+  }
+
+  a:focus {
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: var(--focus-outline-offset);
+  }
+
+  /* Enhanced underline effect */
+  .content a {
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+
+  .content a:hover {
+    text-decoration-color: var(--color-accent-hover);
+  }
+
+  /* ✅ UPDATED: Scoped Button Styling - Excludes VideoGrid components */
+  .content button,
+  .footer button,
+  button:not([class*="video"]):not([class*="player"]):not([class*="control"]):not([class*="media"]):not([class*="retry"]):not([class*="nav"]):not([class*="mobile-menu"]):not([class*="hamburger"]) {
+    font-family: var(--font-body);
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    transition: var(--transition-fast);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-small);
+    min-height: var(--player-control-size);
+  }
+
+  .content button:focus,
+  .footer button:focus,
+  button:not([class*="video"]):not([class*="player"]):not([class*="control"]):not([class*="media"]):not([class*="retry"]):not([class*="nav"]):not([class*="mobile-menu"]):not([class*="hamburger"]):focus {
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: var(--focus-outline-offset);
+  }
+
+  .content button:disabled,
+  .footer button:disabled,
+  button:not([class*="video"]):not([class*="player"]):not([class*="control"]):not([class*="media"]):not([class*="retry"]):not([class*="nav"]):not([class*="mobile-menu"]):not([class*="hamburger"]):disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Form Elements Enhanced */
+  input,
+  textarea,
+  select {
+    font-family: var(--font-body);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-sm) var(--spacing-md);
+    transition: var(--transition-fast);
+    background-color: var(--background-card);
+    color: var(--primary-text);
+    font-size: var(--font-size-body);
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: -2px;
+    border-color: var(--color-accent);
+  }
+
+  /* =================================
+     ENHANCED LAYOUT COMPONENTS
+     ================================= */
+
+  /* Enhanced Skip Link */
+  .skip-link {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    background: var(--color-accent);
+    color: var(--color-off-white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: 500;
+    z-index: var(--z-index-tooltip);
+    transition: var(--transition-fast);
+    font-size: var(--font-size-body);
+  }
+
+  .skip-link:focus {
+    position: fixed;
+    top: var(--spacing-md);
+    left: var(--spacing-md);
+  }
+
+  /* Enhanced Main Content */
+  .main-content {
+    padding-top: calc(var(--header-height) + var(--spacing-md));
+    padding-bottom: var(--spacing-lg);
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+  }
+
+  .content-grid {
+    display: grid;
+    gap: var(--spacing-xxl);
+  }
+
+  /* Enhanced Container */
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--container-padding-md);
+    max-width: var(--container-max-width);
+    width: 100%;
+  }
+
+  /* Enhanced Text Selection */
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-off-white);
+  }
+
+  ::-moz-selection {
+    background-color: var(--color-accent);
+    color: var(--color-off-white);
+  }
+
+  /* Enhanced Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--background-light);
+    border-radius: var(--radius-md);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--secondary-text);
+    border-radius: var(--radius-md);
+    transition: background-color var(--transition-fast);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--muted-text);
+  }
+
+  /* ✅ UPDATED: Renamed loading states to avoid VideoGrid conflicts */
+  .global-loading-shimmer {
+    background: linear-gradient(90deg,
+        var(--color-light-grey) 25%,
+        var(--background-light) 50%,
+        var(--color-light-grey) 75%);
+    background-size: 200% 100%;
+    animation: shimmer var(--animation-duration-slow) infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* ✅ UPDATED: Renamed animation utilities to avoid VideoGrid conflicts */
+  .global-fade-in {
+    opacity: 0;
+    animation: fadeIn var(--animation-duration-normal) var(--animation-easing) forwards;
+  }
+
+  .global-slide-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp var(--animation-duration-normal) var(--animation-easing) forwards;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Enhanced Focus for Better Accessibility */
+  .focus-visible:focus {
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: var(--focus-outline-offset);
+  }
+
+  /* Enhanced Card Component Base */
+  .card {
+    background: var(--background-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-default);
+    overflow: hidden;
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: var(--translate-y-sm);
+  }
+
+  /* Enhanced Section Spacing */
+  .section {
+    padding: var(--section-padding-large);
+  }
+
+  .section-content {
+    max-width: var(--container-content-width);
+    margin: 0 auto;
+    padding: var(--container-padding-md);
+  }
+
+  /* =================================
+     ENHANCED RESPONSIVE DESIGN
+     ================================= */
+
+  /* Mobile-first responsive updates */
+  @media (max-width: 1024px) {
+    .container {
+      padding: var(--container-padding-sm);
+    }
+
+    .main-content {
+      padding-left: var(--spacing-md);
+      padding-right: var(--spacing-md);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: var(--container-padding-xs);
+    }
+
+    .section {
+      padding: var(--section-padding-medium);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section {
+      padding: var(--section-padding-small);
+    }
+
+    .main-content {
+      padding-left: var(--spacing-sm);
+      padding-right: var(--spacing-sm);
+    }
+  }
+
+  /* =================================
+     ENHANCED ACCESSIBILITY & PREFERENCES
+     ================================= */
+
+  /* Enhanced reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Enhanced high contrast mode */
+  @media (prefers-contrast: high) {
+    :root {
+      --color-accent: #0000ff;
+      --color-brand-gradient-primary: #0000ff;
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    }
+
+    .content button,
+    .footer button,
+    button:not([class*="video"]):not([class*="player"]):not([class*="control"]):not([class*="media"]):not([class*="retry"]):not([class*="nav"]):not([class*="mobile-menu"]):not([class*="hamburger"]),
+    .card {
+      border: 2px solid var(--primary-text);
+    }
+
+    h1 {
+      -webkit-text-fill-color: currentColor;
+      background: none;
+      color: var(--primary-text);
+    }
+  }
+
+  /* Enhanced print styles */
+  @media print {
+    * {
+      background: white !important;
+      color: black !important;
+      box-shadow: none !important;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+
+    .no-print {
+      display: none !important;
+    }
+
+    .main-content {
+      padding-top: 0;
+    }
+  }
+}

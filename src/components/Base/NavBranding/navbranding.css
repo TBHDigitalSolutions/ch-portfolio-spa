@@ -1,0 +1,166 @@
+/* src/components/Base/NavBranding/navbranding.css */
+
+/* ============================
+   🏷️ NAV BRANDING COMPONENT
+   Responsive stacked branding with divider
+============================ */
+
+/* === MAIN BRANDING WRAPPER === */
+.nav-branding {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+    /* Allow flex shrinking */
+}
+
+.nav-branding-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+    min-width: 0;
+    /* Allow text truncation if needed */
+    position: relative;
+}
+
+/* === BRAND NAME === */
+.nav-brand-name {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h4);
+    font-weight: 700;
+    line-height: var(--line-height-h2);
+    background: var(--color-brand-gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 auto;
+    color: var(--primary-text);
+    transition: var(--transition-default);
+    white-space: nowrap;
+}
+
+.nav-brand-name:hover {
+    transform: scale(1.02);
+}
+
+/* === BRAND SUBTITLE === */
+.nav-brand-subtitle {
+    font-family: var(--font-body);
+    font-size: var(--font-size-small);
+    font-weight: 500;
+    color: var(--muted-text);
+    margin: 0 auto;
+    line-height: var(--line-height-small);
+    opacity: 0.8;
+    white-space: nowrap;
+    transition: color var(--transition-fast);
+}
+
+.nav-brand-subtitle:hover {
+    color: var(--secondary-text);
+    opacity: 1;
+}
+
+/* === RESPONSIVE DESIGN === */
+
+/* Large screens and down */
+@media (max-width: 1200px) {
+    .nav-brand-name {
+        font-size: var(--font-size-h5);
+    }
+
+    .nav-brand-subtitle {
+        font-size: var(--font-size-caption);
+    }
+}
+
+/* Tablet and smaller laptops */
+@media (max-width: 1024px) {
+    .nav-brand-name {
+        font-size: var(--font-size-h5);
+    }
+
+    .nav-brand-subtitle {
+        font-size: var(--font-size-caption);
+    }
+}
+
+/* Tablet portrait and mobile landscape */
+@media (max-width: 768px) {
+    .nav-branding-container {
+        gap: var(--spacing-xs);
+    }
+
+    .nav-brand-name {
+        font-size: var(--font-size-h5);
+    }
+
+    .nav-brand-subtitle {
+        font-size: var(--font-size-xsm);
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
+    .nav-branding-container {
+        gap: 2px;
+    }
+
+    .nav-brand-name {
+        font-size: var(--font-size-body);
+        line-height: 1.2;
+    }
+
+    .nav-brand-subtitle {
+        font-size: var(--font-size-xsm);
+    }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 360px) {
+    .nav-brand-name {
+        font-size: var(--font-size-small);
+    }
+
+    .nav-brand-subtitle {
+        font-size: 10px;
+    }
+}
+
+/* === ACCESSIBILITY & PREFERENCES === */
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .nav-brand-name {
+        -webkit-text-fill-color: currentColor;
+        background: none;
+        color: var(--primary-text);
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .nav-brand-name,
+    .nav-brand-subtitle {
+        transition: none;
+    }
+
+    .nav-brand-name:hover {
+        transform: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .nav-branding {
+        break-inside: avoid;
+    }
+
+    .nav-brand-name {
+        -webkit-text-fill-color: currentColor;
+        background: none;
+        color: var(--primary-text);
+    }
+}

@@ -1,0 +1,192 @@
+[
+  {
+    "id": "ethan-carl-social-media-dates-post",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/ethan-carl-social-media-dates-post.png",
+    "alt": "Ethan Carl social media dates announcement",
+    "caption": "Social media graphic announcing upcoming dates",
+    "size": "tall"
+  },
+  {
+    "id": "natoli-tablets-lab-bw",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/natoli-tablets-lab-bw.png",
+    "alt": "Natoli scientific tablets in lab (black and white)",
+    "caption": "Scientific tablet analysis in laboratory environment – Natoli Engineering",
+    "size": "tall"
+  },
+  {
+    "id": "tablet-tooling-rods-detail",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/tablet-tooling-rods-detail.jpg",
+    "alt": "Tablet tooling rods detail",
+    "caption": "Close-up detail of tablet tooling rods",
+    "size": "tall"
+  },
+  {
+    "id": "ethan-carl-tshirt-design-win",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/ethan-carl-tshirt-design-win.png",
+    "alt": "Ethan Carl ‘Win’ T-shirt design",
+    "caption": "‘Win’ themed Ethan Carl merchandise design",
+    "size": "medium"
+  },
+  {
+    "id": "multi-tip-tooling-guide-desk",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/multi-tip-tooling-guide-desk.jpg",
+    "alt": "Multi-tip tooling guide on desk",
+    "caption": "Multi-tip tooling guide documentation and reference materials",
+    "size": "large"
+  },
+  {
+    "id": "liu-tablet-manufacturing-training-promo",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/liu-tablet-manufacturing-training-promo.png",
+    "alt": "LIU tablet manufacturing training promo",
+    "caption": "Promotional graphic for tablet manufacturing training at LIU",
+    "size": "small"
+  },
+  {
+    "id": "stl-fight-sports-winner-graphic-blue",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/stl-fight-sports-winner-graphic-blue.png",
+    "alt": "STL Fight sports winner graphic – blue",
+    "caption": "Winner announcement graphic for STL Fight Sports (blue)",
+    "size": "small"
+  },
+  {
+    "id": "engine-block-hovis-1",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/engine-block-hovis-1.png",
+    "alt": "Hovis engine block detail 1",
+    "caption": "Detailed view of the Hovis engine block manufacturing process",
+    "size": "tall",
+    "priority": true
+  },
+  {
+    "id": "restaurant-special-flyer",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/restaurant-special-flyer.png",
+    "alt": "Restaurant special social media flyer",
+    "caption": "Flyer announcing a restaurant’s special promotion",
+    "size": "tall"
+  },
+  {
+    "id": "project-timeline-gantt-chart",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/project-timeline-gantt-chart.png",
+    "alt": "Project timeline Gantt chart",
+    "caption": "Detailed project timeline displayed as a Gantt chart",
+    "size": "wide"
+  },
+  {
+    "id": "turret-motion-1",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/turret-motion-1.jpg",
+    "alt": "Turret motion machinery detail",
+    "caption": "Precision turret motion machinery and mechanical components",
+    "size": "medium"
+  },
+  {
+    "id": "ethan-carl-music-promo",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/ethan-carl-music-promo.jpg",
+    "alt": "Ethan Carl promotional music graphic",
+    "caption": "Promotional graphic for Ethan Carl music single",
+    "size": "small"
+  },
+  {
+    "id": "natoli-knows-segments-promo",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/natoli-knows-segments-promo.png",
+    "alt": "Natoli knows segments promotional graphic",
+    "caption": "Marketing graphic highlighting Natoli’s segment expertise",
+    "size": "small"
+  },
+  {
+    "id": "ethan-carl-album-cover-art",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/ethan-carl-album-cover-art.png",
+    "alt": "Ethan Carl album cover art",
+    "caption": "Official album cover artwork for Ethan Carl’s latest release",
+    "size": "small"
+  },
+  {
+    "id": "replacement-parts-promo",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/replacement-parts-promo.png",
+    "alt": "Replacement parts promotional graphic",
+    "caption": "Graphic advertising replacement parts and services",
+    "size": "small"
+  },
+  {
+    "id": "tablet-tooling-segment-assembly-2",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/tablet-tooling-segment-assembly-2.jpg",
+    "alt": "Tablet tooling segment assembly 2",
+    "caption": "Second angle on segment assembly for tablet tooling",
+    "size": "large"
+  },
+  {
+    "id": "ethan-carl-social-media-august-post",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/ethan-carl-social-media-august-post.png",
+    "alt": "Ethan Carl social media August post",
+    "caption": "Social media promotional image for August release",
+    "size": "tall"
+  },
+  {
+    "id": "webinar-lead-generation-promo",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/webinar-lead-generation-promo.jpg",
+    "alt": "Webinar lead generation promotional graphic",
+    "caption": "Promotional graphic for Natoli Wednesday Academy webinar series",
+    "size": "tall"
+  },
+  {
+    "id": "ethan-carl-tshirt-design",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/ethan-carl-tshirt-design.png",
+    "alt": "Ethan Carl T-shirt design",
+    "caption": "Official Ethan Carl merchandise T-shirt mockup",
+    "size": "medium"
+  },
+  {
+    "id": "hallmark-movie-badge-design",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/hallmark-movie-badge-design.png",
+    "alt": "Hallmark movie badge design",
+    "caption": "Custom badge design for Hallmark movie campaign",
+    "size": "tall"
+  },
+  {
+    "id": "engine-block-hovis-2",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/engine-block-hovis-2.png",
+    "alt": "Hovis engine block detail 2",
+    "caption": "Secondary view of Hovis engine block precision engineering",
+    "size": "large"
+  },
+  {
+    "id": "tablet-tooling-segment-assembly-1",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/tablet-tooling-segment-assembly-1.jpg",
+    "alt": "Tablet tooling segment assembly 1",
+    "caption": "First angle on segment assembly for tablet tooling",
+    "size": "large"
+  },
+  {
+    "id": "movin-too-fast-ethan-carl-single-artwork",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/movin-too-fast-ethan-carl-single-artwork.png",
+    "alt": "Ethan Carl ‘Movin’ Too Fast’ single artwork",
+    "caption": "Cover art for Ethan Carl’s ‘Movin’ Too Fast’ single",
+    "size": "small"
+  },
+  {
+    "id": "multi-tip-laser-tool-1",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/multi-tip-laser-tool-1.png",
+    "alt": "Multi-tip laser tooling device",
+    "caption": "Advanced multi-tip laser tooling device for precision manufacturing",
+    "size": "medium"
+  },
+  {
+    "id": "real-estate-social-media-promo",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/real-estate-social-media-promo.png",
+    "alt": "Real estate social media promo",
+    "caption": "Social media promotional image for real estate listing",
+    "size": "tall"
+  },
+  {
+    "id": "tablet-press-tooling-training-aug-2023",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/tablet-press-tooling-training-aug-2023.png",
+    "alt": "Tablet press tooling training August 2023",
+    "caption": "Promotional graphic for August 2023 tablet press tooling training",
+    "size": "small"
+  },
+  {
+    "id": "stl-fight-sports-winner-graphic-red",
+    "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/image-grid/stl-fight-sports-winner-graphic-red.png",
+    "alt": "STL Fight sports winner graphic – red",
+    "caption": "Winner announcement graphic for STL Fight Sports (red)",
+    "size": "small"
+  }
+]

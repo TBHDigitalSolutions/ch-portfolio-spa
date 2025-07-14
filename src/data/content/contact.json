@@ -1,0 +1,19 @@
+{
+  "links": [
+    {
+      "type": "primary",
+      "label": "Email",
+      "href": "mailto:conorhovis1@gmail.com"
+    },
+    {
+      "type": "secondary",
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/conor-hovis/"
+    },
+    {
+      "type": "secondary",
+      "label": "More Projects",
+      "href": "https://www.linkedin.com/in/conor-hovis/details/projects/"
+    }
+  ]
+}

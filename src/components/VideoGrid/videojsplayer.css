@@ -1,0 +1,436 @@
+/* src/components/VideoGrid/videojsplayer.css */
+/* VideoJSPlayer Component Styles Using TBH Variables - UPDATED */
+
+/* =================================
+   VIDEOJS PLAYER WRAPPER
+   ================================= */
+.videojs-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: var(--background-dark);
+    border-radius: var(--player-border-radius);
+    overflow: hidden;
+}
+
+/* =================================
+   ENHANCED VIDEO.JS STYLING
+   ================================= */
+.video-js.vjs-default-skin {
+    background: var(--background-dark);
+    border-radius: var(--player-border-radius);
+    overflow: hidden;
+    font-family: var(--font-body);
+}
+
+/* =================================
+   CONTROL BAR ENHANCEMENTS
+   ================================= */
+.video-js .vjs-control-bar {
+    background: linear-gradient(180deg,
+            transparent 0%,
+            rgba(0, 0, 0, 0.8) 100%);
+    backdrop-filter: blur(8px);
+    border-radius: 0 0 var(--player-border-radius) var(--player-border-radius);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.875rem;
+}
+
+/* =================================
+   TIME DISPLAY
+   ================================= */
+.video-js .vjs-current-time-display,
+.video-js .vjs-duration-display {
+    font-size: var(--font-size-caption);
+    color: var(--color-off-white);
+    font-family: var(--font-mono, monospace);
+    font-weight: 500;
+}
+
+.video-js .vjs-time-divider {
+    color: var(--color-light-grey);
+    margin: 0 var(--spacing-xs);
+}
+
+/* =================================
+   BUTTON STYLING
+   ================================= */
+.video-js .vjs-play-control,
+.video-js .vjs-mute-control,
+.video-js .vjs-fullscreen-control {
+    color: var(--color-off-white);
+    transition: color var(--transition-fast);
+    border-radius: var(--radius-sm);
+    margin: 0 var(--spacing-xs);
+}
+
+.video-js .vjs-play-control:hover,
+.video-js .vjs-mute-control:hover,
+.video-js .vjs-fullscreen-control:hover {
+    color: #3b82f6;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.video-js .vjs-play-control:focus,
+.video-js .vjs-mute-control:focus,
+.video-js .vjs-fullscreen-control:focus {
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: var(--focus-outline-offset);
+}
+
+.video-js .vjs-button>.vjs-icon-placeholder:before {
+    font-size: 1.5em;
+    line-height: 1.5;
+}
+
+/* =================================
+   VOLUME CONTROL
+   ================================= */
+.video-js .vjs-volume-control {
+    margin-right: var(--spacing-sm);
+}
+
+.video-js .vjs-volume-bar {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xs);
+    height: 4px;
+}
+
+.video-js .vjs-volume-level {
+    background: #3b82f6;
+    border-radius: var(--radius-xs);
+}
+
+.video-js .vjs-volume-handle {
+    width: 12px;
+    height: 12px;
+    background: #3b82f6;
+    border-radius: var(--radius-circle);
+    border: 2px solid var(--color-off-white);
+    box-shadow: var(--shadow-sm);
+}
+
+/* =================================
+   PROGRESS BAR ENHANCEMENTS
+   ================================= */
+.video-js .vjs-progress-control {
+    position: relative;
+    height: 6px;
+    margin: 0 var(--spacing-sm);
+    flex: 1;
+}
+
+.video-js .vjs-progress-holder {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xs);
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+}
+
+.video-js .vjs-play-progress {
+    background: #3b82f6;
+    border-radius: var(--radius-xs);
+    position: relative;
+}
+
+.video-js .vjs-play-progress:before {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: #3b82f6;
+    border-radius: var(--radius-circle);
+    border: 2px solid var(--color-off-white);
+    box-shadow: var(--shadow-sm);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.video-js .vjs-progress-control:hover .vjs-play-progress:before {
+    opacity: 1;
+}
+
+.video-js .vjs-load-progress {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: var(--radius-xs);
+}
+
+/* =================================
+   TOOLTIP STYLING
+   ================================= */
+.video-js .vjs-tooltip {
+    background: var(--background-dark);
+    color: var(--color-off-white);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-caption);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(4px);
+}
+
+/* =================================
+   MENU STYLING
+   ================================= */
+.video-js .vjs-menu {
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.video-js .vjs-menu-item {
+    color: var(--color-off-white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    transition: background-color var(--transition-fast);
+    font-size: var(--font-size-small);
+}
+
+.video-js .vjs-menu-item:hover {
+    background: #3b82f6;
+    color: var(--color-off-white);
+}
+
+.video-js .vjs-menu-item.vjs-selected {
+    background: rgba(59, 130, 246, 0.3);
+    color: var(--color-off-white);
+}
+
+/* =================================
+   QUALITY SELECTOR SPECIFIC
+   ================================= */
+.video-js .vjs-quality-selector .vjs-menu-button {
+    color: white;
+}
+
+.video-js .vjs-quality-selector .vjs-menu {
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* =================================
+   POSTER IMAGE
+   ================================= */
+.video-js .vjs-poster {
+    background-size: cover;
+    background-position: center;
+    border-radius: var(--player-border-radius);
+}
+
+/* =================================
+   LOADING SPINNER
+   ================================= */
+.video-js .vjs-loading-spinner {
+    border-color: #3b82f6 transparent #3b82f6 transparent;
+    border-width: 3px;
+    width: 40px;
+    height: 40px;
+}
+
+/* =================================
+   TEXT TRACK DISPLAY
+   ================================= */
+.video-js .vjs-text-track-display {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--color-off-white);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    margin: var(--spacing-sm);
+    backdrop-filter: blur(4px);
+}
+
+/* =================================
+   SETTINGS MENU
+   ================================= */
+.video-js .vjs-settings-dialog {
+    background: var(--background-dark);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.video-js .vjs-settings-dialog .vjs-settings-sub-menu-title {
+    color: var(--color-off-white);
+    font-weight: 600;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    font-size: var(--font-size-body);
+}
+
+.video-js .vjs-settings-dialog .vjs-settings-sub-menu-value {
+    color: var(--color-accent);
+    font-size: var(--font-size-small);
+}
+
+/* =================================
+   RESPONSIVE ADJUSTMENTS
+   ================================= */
+@media (max-width: 768px) {
+    .video-js .vjs-control-bar {
+        padding: var(--spacing-xs);
+        font-size: 0.75rem;
+    }
+
+    .video-js .vjs-current-time-display,
+    .video-js .vjs-duration-display {
+        font-size: var(--font-size-xsm);
+    }
+
+    .video-js .vjs-progress-control {
+        margin: 0 var(--spacing-xs);
+    }
+
+    .video-js .vjs-play-control,
+    .video-js .vjs-mute-control,
+    .video-js .vjs-fullscreen-control {
+        margin: 0 var(--spacing-xs);
+    }
+
+    .video-js .vjs-menu-item {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-caption);
+    }
+}
+
+@media (max-width: 480px) {
+    .video-js .vjs-control-bar {
+        padding: 2px var(--spacing-xs);
+    }
+
+    .video-js .vjs-current-time-display,
+    .video-js .vjs-duration-display {
+        display: none;
+        /* Hide on very small screens */
+    }
+
+    .video-js .vjs-progress-control {
+        margin: 0 2px;
+    }
+
+    .video-js .vjs-play-control,
+    .video-js .vjs-mute-control,
+    .video-js .vjs-fullscreen-control {
+        margin: 0 2px;
+        padding: var(--spacing-xs);
+    }
+}
+
+/* =================================
+   YOUTUBE TECH SPECIFIC
+   ================================= */
+.video-js.vjs-youtube .vjs-poster {
+    display: none;
+    /* YouTube handles its own poster */
+}
+
+.video-js.vjs-youtube .vjs-tech {
+    border-radius: var(--player-border-radius);
+}
+
+/* =================================
+   FULLSCREEN ADJUSTMENTS
+   ================================= */
+.video-js.vjs-fullscreen {
+    border-radius: 0;
+}
+
+.video-js.vjs-fullscreen .vjs-control-bar {
+    border-radius: 0;
+}
+
+/* =================================
+   DARK MODE ENHANCEMENTS
+   ================================= */
+@media (prefers-color-scheme: dark) {
+    .video-js .vjs-control-bar {
+        background: linear-gradient(180deg,
+                transparent 0%,
+                rgba(0, 0, 0, 0.95) 100%);
+    }
+
+    .video-js .vjs-menu {
+        background: var(--background-dark);
+        border-color: var(--border-color);
+    }
+
+    .video-js .vjs-tooltip {
+        background: var(--background-dark);
+        border-color: var(--border-color);
+    }
+
+    .video-js .vjs-settings-dialog {
+        background: var(--background-dark);
+        border-color: var(--border-color);
+    }
+}
+
+/* =================================
+   HIGH CONTRAST MODE
+   ================================= */
+@media (prefers-contrast: high) {
+    .video-js .vjs-control-bar {
+        background: rgba(0, 0, 0, 0.9);
+        border-top: 2px solid var(--color-off-white);
+    }
+
+    .video-js .vjs-play-control,
+    .video-js .vjs-mute-control,
+    .video-js .vjs-fullscreen-control {
+        border: 1px solid var(--color-off-white);
+    }
+
+    .video-js .vjs-progress-holder {
+        border: 1px solid var(--color-off-white);
+    }
+
+    .video-js .vjs-menu {
+        border: 2px solid var(--color-off-white);
+    }
+}
+
+/* =================================
+   REDUCED MOTION
+   ================================= */
+@media (prefers-reduced-motion: reduce) {
+
+    .video-js .vjs-play-control,
+    .video-js .vjs-mute-control,
+    .video-js .vjs-fullscreen-control,
+    .video-js .vjs-play-progress:before {
+        transition: none;
+    }
+
+    .video-js .vjs-loading-spinner {
+        animation: none;
+    }
+}
+
+/* =================================
+   ACCESSIBILITY ENHANCEMENTS
+   ================================= */
+.video-js .vjs-control:focus-visible {
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: var(--focus-outline-offset);
+}
+
+.video-js .vjs-slider:focus {
+    box-shadow: 0 0 0 var(--focus-outline-width) var(--color-accent-light);
+}
+
+/* Ensure minimum touch target sizes */
+.video-js .vjs-play-control,
+.video-js .vjs-mute-control,
+.video-js .vjs-fullscreen-control {
+    min-width: 44px;
+    min-height: 44px;
+}

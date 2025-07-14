@@ -1,0 +1,41 @@
+[
+  {
+    "id": "ncf-45-encapsulator-brochure",
+    "url": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/pdf-gallery/ncf-45-encapsulator-brochure.pdf",
+    "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/pdf-gallery/ncf-45-encapsulator-brochure-thumb.png",
+    "title": "NCF-45 Encapsulator Technical Brochure",
+    "description": "Technical brochure for the NCF-45 Encapsulator machine featuring specifications, operational highlights, and detailed component information. Used for trade shows and client presentations.",
+    "pages": 2,
+    "fileSize": "1.2 MB",
+    "category": "Technical Brochure",
+    "tags": ["encapsulator", "machinery", "pharmaceutical", "technical", "trade-show"],
+    "createdAt": "2021-09-22",
+    "updatedAt": "2021-09-22"
+  },
+  {
+    "id": "mckelvey-sales-flyer",
+    "url": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/pdf-gallery/mckelvey-sales-flyer.pdf",
+    "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/pdf-gallery/mckelvey-sales-flyer-thumb.png",
+    "title": "McKelvey Properties Commercial Real Estate Listing",
+    "description": "Commercial real estate sales flyer for 7455 Veterans Memorial Parkway, St. Peters, MO. Features property highlights, benefits, and contact information for this flex/commercial space.",
+    "pages": 1,
+    "fileSize": "0.8 MB",
+    "category": "Real Estate Marketing",
+    "tags": ["real-estate", "commercial", "property", "sales", "mckelvey"],
+    "createdAt": "2023-10-01",
+    "updatedAt": "2023-10-01"
+  },
+  {
+    "id": "natoli-insider-newsletter-feb-2023",
+    "url": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/pdf-gallery/natoli-insider-newsletter-feb-2023.pdf",
+    "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/pdf-gallery/natoli-insider-newsletter-feb-2023-thumb.png",
+    "title": "Natoli Insider Newsletter – February 2023",
+    "description": "Monthly internal company newsletter featuring employee spotlight, production updates, C.O.S.T. initiative, work anniversaries, new hires, and company events.",
+    "pages": 4,
+    "fileSize": "2.1 MB",
+    "category": "Internal Newsletter",
+    "tags": ["newsletter", "internal", "employees", "company-updates", "natoli"],
+    "createdAt": "2023-02-01",
+    "updatedAt": "2023-02-01"
+  }
+]

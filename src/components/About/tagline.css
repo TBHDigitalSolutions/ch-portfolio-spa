@@ -1,0 +1,134 @@
+/* src/components/About/tagline.css */
+
+/* ============================
+   🏷️ CONDENSED ABOUT TAGLINE COMPONENT
+   Clean subtitle styling with minimal spacing
+   UPDATED: Removed overlays, hover effects, and condensed spacing
+============================ */
+
+/* Tagline wrapper with minimal positioning */
+.about-tagline-wrapper {
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* Clean tagline styling */
+.about-tagline {
+    font-family: var(--font-body);
+    font-size: var(--font-size-h4);
+    font-weight: 400;
+    line-height: var(--line-height-body);
+    color: var(--secondary-text);
+    margin: 0 auto;
+    max-width: 60ch;
+    position: relative;
+
+    /* Minimal styling */
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-style: italic;
+    letter-spacing: 0.015em;
+}
+
+/* Simple decorative quotes */
+.about-tagline::before,
+.about-tagline::after {
+    content: '"';
+    font-family: var(--font-heading);
+    font-size: 1em;
+    color: var(--color-accent);
+    opacity: 0.7;
+    font-weight: 300;
+}
+
+.about-tagline::before {
+    margin-right: 0.2em;
+}
+
+.about-tagline::after {
+    margin-left: 0.2em;
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 1024px) {
+    .about-tagline-wrapper {
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .about-tagline {
+        font-size: var(--font-size-small);
+        max-width: 70ch;
+        padding: var(--spacing-xs);
+    }
+}
+
+@media (max-width: 768px) {
+    .about-tagline-wrapper {
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .about-tagline {
+        font-size: var(--font-size-small);
+        max-width: 80ch;
+        padding: var(--spacing-xs);
+        line-height: var(--line-height-small);
+    }
+
+    .about-tagline::before,
+    .about-tagline::after {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-tagline {
+        font-size: var(--font-size-small);
+        max-width: 100%;
+        padding: var(--spacing-xs);
+        letter-spacing: 0.01em;
+    }
+
+    .about-tagline::before,
+    .about-tagline::after {
+        font-size: 0.9em;
+        margin: 0 0.1em;
+    }
+}
+
+/* === ACCESSIBILITY & PREFERENCES === */
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .about-tagline {
+        color: var(--primary-text);
+    }
+
+    .about-tagline::before,
+    .about-tagline::after {
+        color: var(--primary-text);
+        opacity: 1;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+
+    .about-tagline::before,
+    .about-tagline::after {
+        color: var(--color-accent-medium);
+    }
+}
+
+/* Print styles */
+@media print {
+    .about-tagline {
+        padding: var(--spacing-xs);
+        color: var(--primary-text);
+    }
+
+    .about-tagline::before,
+    .about-tagline::after {
+        color: var(--primary-text);
+        opacity: 0.8;
+    }
+}

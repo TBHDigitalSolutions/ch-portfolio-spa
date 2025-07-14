@@ -1,0 +1,263 @@
+/* src/components/VideoGrid/videogrid-component.css */
+/* Main VideoGrid Component Layout - CLEANED & FIXED */
+
+/* =================================
+   VIDEO GRID SHOWCASE LAYOUT
+   ================================= */
+.video-grid-showcase {
+    width: 100%;
+    margin: 2rem auto;
+    max-width: 1600px;
+    padding: 0 1rem;
+}
+
+.video-grid-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: #1f2937;
+    margin-bottom: 3rem;
+    font-family: var(--font-heading);
+    line-height: var(--line-height-h1);
+}
+
+/* Section Layouts */
+.video-section {
+    margin-bottom: 4rem;
+    min-height: 600px;
+    /* Ensure section has height */
+}
+
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+    font-family: var(--font-heading);
+    line-height: var(--line-height-h2);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4rem;
+    height: 3px;
+    background: #3b82f6;
+    border-radius: 2px;
+}
+
+/* FIXED: Proper height and layout constraints */
+.video-section-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-height: 500px;
+    /* Minimum height */
+    height: auto;
+    /* Allow content to expand */
+}
+
+@media (min-width: 1024px) {
+    .video-section-content {
+        flex-direction: row;
+        gap: 3rem;
+        min-height: 600px;
+        /* Consistent minimum height */
+    }
+
+    /* Creative section reverses the order */
+    .creative-layout {
+        flex-direction: row-reverse;
+    }
+}
+
+/* Grid Sidebar - FIXED HEIGHT ISSUES */
+.video-grid-sidebar {
+    width: 100%;
+    flex-shrink: 0;
+    /* Prevent shrinking */
+    min-height: 300px;
+    /* Ensure minimum height */
+}
+
+@media (min-width: 1024px) {
+    .video-grid-sidebar {
+        width: 35%;
+        min-height: 500px;
+        /* Consistent with content height */
+    }
+}
+
+/* Player Area - FIXED FLEX ISSUES */
+.video-player-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    /* Ensure minimum height */
+}
+
+@media (min-width: 1024px) {
+    .video-player-area {
+        width: 65%;
+        min-height: 500px;
+        /* Match sidebar height */
+    }
+}
+
+.player-header {
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+    /* Don't let header shrink */
+}
+
+.player-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+    line-height: 1.4;
+    font-family: var(--font-heading);
+}
+
+/* FIXED: Video Grid Container Heights */
+.video-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    overflow-y: auto;
+    height: 100%;
+    /* Take full available height */
+    padding: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db transparent;
+}
+
+.video-grid-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.video-grid-container::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 3px;
+}
+
+/* Full grid layout for variant="full" */
+.video-grid-container-full {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    min-height: 400px;
+}
+
+/* Empty States */
+.video-grid-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #6b7280;
+    text-align: center;
+}
+
+/* =================================
+   VIDEOGRID SPECIFIC ENHANCEMENTS - FIXED
+   ================================= */
+.video-section-content .video-player-container {
+    flex: 1;
+    /* Take remaining space */
+    min-height: 300px;
+}
+
+.video-section-content .videojs-player-wrapper {
+    height: 100%;
+}
+
+.video-player-area .video-player-container {
+    flex: 1;
+    /* Important: take remaining space after header */
+    min-height: 300px;
+}
+
+@media (min-width: 1024px) {
+    .video-player-area .video-player-container {
+        min-height: 400px;
+    }
+}
+
+/* =================================
+   RESPONSIVE DESIGN - CLEANED
+   ================================= */
+@media (max-width: 768px) {
+    .video-grid-title {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .video-section {
+        min-height: 400px;
+    }
+
+    .video-section-content {
+        min-height: 400px;
+    }
+
+    .video-grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 0.75rem;
+    }
+
+    .video-grid-sidebar {
+        min-height: 200px;
+    }
+
+    .player-title {
+        font-size: 1.125rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-section-content {
+        min-height: 350px;
+    }
+
+    .video-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+}
+
+/* =================================
+   DARK MODE SUPPORT
+   ================================= */
+@media (prefers-color-scheme: dark) {
+    .video-grid-title {
+        color: #f9fafb;
+    }
+
+    .section-title {
+        color: #e5e7eb;
+    }
+
+    .player-title {
+        color: #f9fafb;
+    }
+}
+
+/* =================================
+   HIGH CONTRAST MODE
+   ================================= */
+@media (prefers-contrast: high) {
+    .section-title::after {
+        background: var(--primary-text);
+    }
+}

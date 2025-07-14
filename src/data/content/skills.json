@@ -1,0 +1,35 @@
+{
+  "title": "Skills",
+  "skills": [
+    {
+      "id": "adobe-creative-cloud",
+      "label": "Adobe Creative Cloud",
+      "description": "Expert proficiency across the entire suite"
+    },
+    {
+      "id": "photography-video",
+      "label": "Photography & Video Editing",
+      "description": "From concept to final cut"
+    },
+    {
+      "id": "copywriting",
+      "label": "Copywriting",
+      "description": "Crafting messages that resonate"
+    },
+    {
+      "id": "web-dev",
+      "label": "Web Development",
+      "description": "Building digital experiences"
+    },
+    {
+      "id": "digital-marketing",
+      "label": "Digital Marketing",
+      "description": "Strategy meets creativity"
+    },
+    {
+      "id": "team-leadership",
+      "label": "Team Leadership & Project Management",
+      "description": "Managing teams and timelines"
+    }
+  ]
+}

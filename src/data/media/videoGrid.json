@@ -1,0 +1,97 @@
+{
+  "corporate": [
+    {
+      "id": "encapsulation-before-and-after-music",
+      "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/corporate/Encapsulation Before&After MUSIC.MP4",
+      "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/corporate/encapsulation-before-and-after-music-thumb.png",
+      "title": "Encapsulation Before & After Music",
+      "category": "Corporate"
+    },
+    {
+      "id": "natoli-tradeshow-video-pack-expo",
+      "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/corporate/Natoli Tradeshow Video (Pack Expo).mp4",
+      "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/corporate/natoli-tradeshow-video-pack-expo-thumb.png",
+      "title": "Natoli Tradeshow Video (Pack Expo)",
+      "category": "Corporate"
+    },
+    {
+      "id": "pack-expo-recap-1-1",
+      "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/corporate/Pack Expo Recap Video 1-1.mp4",
+      "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/corporate/pack-expo-recap-1-1-thumb.png",
+      "title": "Pack Expo Recap Video 1-1",
+      "category": "Corporate"
+    },
+    {
+      "id": "vitafood-booth-video-full",
+      "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/corporate/VITAFOOD_BOOTH_VIDEO_FULL.mp4",
+      "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/corporate/vitafood-booth-video-full-thumb.png",
+      "title": "Vitafood Booth Video (Full)",
+      "category": "Corporate"
+    },
+    {
+      "id": "ncf-45-encapsulator-capsule-filler",
+      "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/corporate/NCF-45 Youtube Final Export.mp4",
+      "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/corporate/ncf-45-encapsulator-capsule-filler-thumb.png",
+      "title": "NCF-45 Encapsulator | Automatic Encapsulation Machine | Natoli | Capsule Filler",
+      "category": "Corporate"
+    },
+    {
+      "id": "natoli-die-table-segments-fette-tablet-press",
+      "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/corporate/Natoli Die Table Segments ｜ Newest Compaction Technology for Fette Tablet Press.mp4",
+      "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/corporate/natoli-die-table-segments-fette-tablet-press-thumb.png",
+      "title": "Natoli Die Table Segments | Newest Compaction Technology for Fette Tablet Press",
+      "category": "Corporate"
+    }
+  ],
+  "creative": [
+    {
+      "id": "green-test-dogs-1",
+      "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/creative/green test - DOGs-1.mp4",
+      "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/creative/green-test-dogs-1-thumb.png",
+      "title": "Green Test – DOGs 1",
+      "category": "Creative"
+    },
+    {
+      "id": "homecoming-water-tower-guiding-my-way-back",
+      "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/creative/Homecoming with the Water Tower Guiding my way back.mp4",
+      "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/creative/homecoming-water-tower-guiding-my-way-back-thumb.png",
+      "title": "Homecoming with the Water Tower Guiding My Way Back",
+      "category": "Creative"
+    },
+    {
+      "id": "i-could-use-a-win-ethan-carl",
+      "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/creative/I Could Use A Win - Ethan Carl (Official Music Video).mp4",
+      "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/creative/i-could-use-a-win-ethan-carl-thumb.jpg",
+      "title": "I Could Use A Win – Ethan Carl (Official Music Video)",
+      "category": "Creative"
+    },
+    {
+      "id": "game-night-sexy-dice-chores",
+      "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/creative/GAME NIGHT_ SEXY DICE _ How To Get Your Man to Do Chores.mp4",
+      "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/creative/game-night-sexy-dice-chores-thumb.png",
+      "title": "GAME NIGHT: SEXY DICE | How To Get Your Man to Do Chores",
+      "category": "Comedy"
+    },
+    {
+      "id": "what-is-the-line",
+      "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/creative/_What_ Is The Line.mp4",
+      "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/creative/what-is-the-line-thumb.png",
+      "title": "\"What\" Is The Line",
+      "category": "Comedy"
+    },
+    {
+      "id": "the-brooklyn-surfer-documentary",
+      "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/creative/The Brooklyn Surfer. A hardcore documentary....mp4",
+      "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/creative/the-brooklyn-surfer-documentary-thumb.png",
+      "title": "The Brooklyn Surfer – A Hardcore Documentary",
+      "category": "Creative"
+    },
+    {
+      "id": "casual-fridays-dress-for-work",
+      "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/creative/CASUAL FRIDAYS- how to dress for work appropriately.mp4",
+      "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/video-grid/creative/casual-fridays-dress-for-work-thumb.png",
+      "title": "CASUAL FRIDAYS – How to Dress for Work Appropriately",
+      "category": "Comedy"
+    }
+  ]
+}

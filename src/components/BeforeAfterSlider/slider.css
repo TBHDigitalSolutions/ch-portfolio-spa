@@ -1,0 +1,772 @@
+/* src/components/BeforeAfterSlider/slider.css - Video Thumbnail Style Layout */
+
+/* ============================
+   🎨 Before & After Slider - Video Card Inspired Layout
+============================ */
+
+/* ===============================
+   MAIN SLIDER DISPLAY - FIXED
+   =============================== */
+
+/* Slider display wrapper - FIX: Remove extra padding/borders */
+.slider-display-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border-radius: var(--radius-lg, 8px);
+    overflow: hidden;
+}
+
+/* React Compare Slider container - FIX: Perfect fit */
+.react-compare-slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: var(--radius-lg, 8px);
+    overflow: hidden;
+    background: var(--background-light, #f8f9fa);
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+    box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
+}
+
+/* Style the dividing line - IMPROVED */
+.react-compare-slider-line {
+    width: 3px;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(255, 255, 255, 1) 50%,
+            rgba(255, 255, 255, 0.9) 100%);
+    transition: all 0.2s ease;
+    z-index: 30;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Style the draggable handle - IMPROVED */
+.react-compare-slider-handle {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border: 3px solid var(--color-accent, #3b82f6);
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: ew-resize;
+    transition: all 0.15s ease;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Handle hover/focus states - IMPROVED TIMING */
+.react-compare-slider-handle:hover {
+    transform: scale(1.1);
+    border-color: var(--color-accent-hover, #2563eb);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.react-compare-slider-handle:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Remove any default SVG "handle" icon */
+.react-compare-slider-handle svg {
+    display: none;
+}
+
+/* Add custom handle indicator */
+.react-compare-slider-handle::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent, #3b82f6);
+    border-radius: 50%;
+}
+
+/* Image styling - FIX: Perfect container fit */
+.react-compare-slider img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: none;
+    border-radius: inherit;
+}
+
+/* Hover effect on the whole slider - IMPROVED */
+.react-compare-slider:hover .react-compare-slider-line {
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 1) 50%,
+            rgba(255, 255, 255, 1) 100%);
+    width: 4px;
+}
+
+/* ===============================
+     CAPTION OVERLAY - FIXED TIMING
+     =============================== */
+
+.slider-caption {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 50;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    backdrop-filter: blur(8px);
+    transition: background-color 0.15s ease;
+    font-family: var(--font-body, -apple-system, BlinkMacSystemFont, sans-serif);
+    line-height: 1.4;
+    max-width: 250px;
+    word-wrap: break-word;
+}
+
+.slider-caption:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+/* ===============================
+     LOADING STATES
+     =============================== */
+
+.slider-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-light, #f8f9fa);
+    color: var(--secondary-text, #6b7280);
+    z-index: 20;
+    border-radius: var(--radius-lg, 8px);
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--color-light-grey, #e5e7eb);
+    border-top: 3px solid var(--color-accent, #3b82f6);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 0.5rem;
+}
+
+.loading-spinner-small {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-light-grey, #e5e7eb);
+    border-top: 2px solid var(--color-accent, #3b82f6);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===============================
+     THUMBNAIL GRID SYSTEM - VIDEO CARD STYLE
+     =============================== */
+
+/* Main thumbnail container */
+.slider-thumbnails {
+    display: flex;
+    transition: all 0.2s ease;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-light-grey, #d1d5db) transparent;
+    height: 100%;
+}
+
+/* Horizontal layout (mobile-first) */
+.slider-thumbnails-horizontal {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    align-items: flex-start;
+}
+
+/* Vertical layout (desktop) */
+.slider-thumbnails-vertical {
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+/* Webkit scrollbar styling */
+.slider-thumbnails::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.slider-thumbnails::-webkit-scrollbar-track {
+    background: var(--background-light, #f8f9fa);
+    border-radius: 3px;
+}
+
+.slider-thumbnails::-webkit-scrollbar-thumb {
+    background-color: var(--color-light-grey, #d1d5db);
+    border-radius: 3px;
+    transition: background-color 0.15s ease;
+}
+
+.slider-thumbnails::-webkit-scrollbar-thumb:hover {
+    background-color: var(--secondary-text, #6b7280);
+}
+
+/* ===============================
+     THUMBNAIL BUTTONS - VIDEO CARD INSPIRED
+     =============================== */
+
+.slider-thumbnail-btn {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: white;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: left;
+    font-family: var(--font-body, -apple-system, BlinkMacSystemFont, sans-serif);
+
+    /* Animation like video cards */
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.4s ease-out forwards;
+    animation-delay: calc(var(--item-index, 0) * 0.1s);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile: compact buttons */
+.slider-thumbnails-horizontal .slider-thumbnail-btn {
+    flex-shrink: 0;
+    width: 140px;
+    min-width: 140px;
+}
+
+/* Desktop: full-width buttons */
+.slider-thumbnails-vertical .slider-thumbnail-btn {
+    width: 100%;
+    margin-bottom: 0.75rem;
+}
+
+/* Hover effects like video cards */
+.slider-thumbnail-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Active state like video cards */
+.slider-thumbnail-btn.active {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Focus states */
+.slider-thumbnail-btn:focus {
+    outline: var(--focus-outline-width, 2px) solid var(--focus-outline-color, #3b82f6);
+    outline-offset: var(--focus-outline-offset, 2px);
+}
+
+/* ===============================
+     THUMBNAIL IMAGE CONTAINER - VIDEO CARD STYLE
+     =============================== */
+
+.thumbnail-image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #f3f4f6;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+    /* Only round top corners like video cards */
+}
+
+.thumbnail-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.4s ease;
+    opacity: 0;
+}
+
+.thumbnail-image.loaded {
+    opacity: 1;
+}
+
+.slider-thumbnail-btn:hover .thumbnail-image {
+    transform: scale(1.05);
+}
+
+/* ===============================
+     THUMBNAIL LOADING & FALLBACK - VIDEO CARD STYLE
+     =============================== */
+
+.thumbnail-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.thumbnail-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 8px 8px 0 0;
+}
+
+.fallback-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.fallback-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+/* ===============================
+     THUMBNAIL INDICATORS - VIDEO CARD STYLE
+     =============================== */
+
+.thumbnail-active-indicator {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 20;
+}
+
+.active-badge {
+    background: #3b82f6;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+/* ===============================
+     THUMBNAIL CONTENT - VIDEO CARD STYLE
+     =============================== */
+
+.thumbnail-content {
+    padding: 0.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Caption text - styled like video title */
+.thumbnail-caption {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-family: var(--font-heading, -apple-system, BlinkMacSystemFont, sans-serif);
+}
+
+.slider-thumbnails-horizontal .thumbnail-caption {
+    font-size: 0.75rem;
+    -webkit-line-clamp: 1;
+}
+
+/* Number indicator - mobile only, styled like video source */
+.thumbnail-number {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.slider-thumbnails-vertical .thumbnail-number {
+    display: none;
+}
+
+/* ===============================
+     MAIN CONTAINER LAYOUT
+     =============================== */
+
+.before-after-slider-container {
+    width: 100%;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    max-width: var(--container-max-width, 1200px);
+}
+
+/* Slider display area */
+.slider-display-area {
+    width: 100%;
+    height: 400px;
+    flex-shrink: 0;
+}
+
+/* Thumbnails area - consistent with video grid styling */
+.slider-thumbnails-area {
+    width: 100%;
+    height: 150px;
+    flex-shrink: 0;
+    background: var(--background-card, #ffffff);
+    border-radius: var(--radius-lg, 8px);
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+    box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.05));
+}
+
+/* Desktop layout adjustments */
+@media (min-width: 768px) {
+    .before-after-slider-container {
+        flex-direction: row;
+        gap: 1.5rem;
+        height: 600px;
+    }
+
+    .slider-display-area {
+        width: 75%;
+        height: 100%;
+    }
+
+    .slider-thumbnails-area {
+        width: 25%;
+        height: 100%;
+    }
+}
+
+/* ===============================
+     ERROR STATES
+     =============================== */
+
+.slider-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: var(--background-light, #f8f9fa);
+    border: 1px solid var(--color-danger, #ef4444);
+    border-radius: var(--radius-lg, 8px);
+    color: var(--color-danger, #ef4444);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.slider-error-icon {
+    font-size: 3rem;
+    margin-bottom: 0.75rem;
+}
+
+.slider-error-message {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.slider-error-details {
+    font-size: 0.875rem;
+    color: var(--secondary-text, #6b7280);
+}
+
+/* Empty state */
+.before-after-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    background: var(--background-light, #f8f9fa);
+    border-radius: var(--radius-lg, 8px);
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+    color: var(--secondary-text, #6b7280);
+    font-size: 1rem;
+}
+
+/* ===============================
+     ACCESSIBILITY ENHANCEMENTS
+     =============================== */
+
+/* Screen reader only content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .react-compare-slider-handle {
+        border-width: 3px;
+        border-color: var(--primary-text, #000000);
+        background: var(--background-card, #ffffff);
+    }
+
+    .slider-thumbnail-btn.active {
+        border: 3px solid var(--primary-text, #000000);
+    }
+
+    .slider-caption {
+        border: 1px solid white;
+    }
+
+    .slider-thumbnail-btn {
+        border: 2px solid var(--primary-text, #000);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+    .react-compare-slider-handle,
+    .slider-thumbnail-btn,
+    .slider-caption,
+    .thumbnail-image {
+        transition: none;
+    }
+
+    .react-compare-slider-handle:hover,
+    .slider-thumbnail-btn:hover {
+        transform: none;
+    }
+
+    .loading-spinner,
+    .loading-spinner-small {
+        animation: none;
+    }
+
+    .slider-thumbnail-btn {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Ensure minimum touch target size on mobile */
+@media (max-width: 767px) {
+    .slider-thumbnail-btn {
+        min-width: 140px;
+        min-height: 120px;
+    }
+}
+
+/* ===============================
+     RESPONSIVE DESIGN
+     =============================== */
+
+@media (max-width: 1024px) {
+    .before-after-slider-container {
+        gap: 1rem;
+    }
+
+    .slider-display-area,
+    .slider-thumbnails-area {
+        border-radius: 6px;
+    }
+}
+
+@media (max-width: 768px) {
+    .before-after-slider-container {
+        height: auto;
+        min-height: 550px;
+        gap: 0.75rem;
+    }
+
+    .slider-display-area {
+        height: 350px;
+    }
+
+    .slider-thumbnails-area {
+        height: 140px;
+    }
+
+    .slider-caption {
+        top: 0.5rem;
+        left: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    .slider-thumbnails-horizontal .slider-thumbnail-btn {
+        width: 120px;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .before-after-slider-container {
+        margin: 1rem 0;
+        gap: 0.5rem;
+        min-height: 450px;
+    }
+
+    .slider-display-area {
+        height: 300px;
+    }
+
+    .slider-thumbnails-area {
+        height: 120px;
+    }
+
+    .slider-thumbnails-horizontal .slider-thumbnail-btn {
+        width: 100px;
+        min-width: 100px;
+    }
+
+    .thumbnail-content {
+        padding: 0.5rem;
+    }
+
+    .slider-caption {
+        padding: 0.25rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* ===============================
+     DARK MODE SUPPORT
+     =============================== */
+
+@media (prefers-color-scheme: dark) {
+    .react-compare-slider {
+        background: var(--background-card-dark, #1f2937);
+        border-color: var(--border-color, rgba(255, 255, 255, 0.1));
+    }
+
+    .slider-loading {
+        background-color: var(--background-medium, #374151);
+        color: var(--secondary-text, #d1d5db);
+    }
+
+    .slider-thumbnail-btn {
+        background: var(--background-card-dark, #1f2937);
+        border-color: #374151;
+    }
+
+    .slider-thumbnail-btn:hover {
+        background: #111827;
+    }
+
+    .slider-thumbnail-btn:not(.active) {
+        color: var(--secondary-text, #d1d5db);
+    }
+
+    .thumbnail-caption {
+        color: #f9fafb;
+    }
+
+    .thumbnail-fallback {
+        background: linear-gradient(135deg, var(--background-medium, #374151), var(--color-dark-charcoal, #111827));
+    }
+
+    .slider-thumbnails::-webkit-scrollbar-track {
+        background: var(--background-medium, #374151);
+    }
+
+    .slider-thumbnails::-webkit-scrollbar-thumb {
+        background-color: var(--secondary-text, #9ca3af);
+    }
+
+    .slider-thumbnails::-webkit-scrollbar-thumb:hover {
+        background-color: var(--primary-text, #f9fafb);
+    }
+
+    .before-after-empty {
+        background: var(--background-card-dark, #1f2937);
+        color: var(--secondary-text, #d1d5db);
+    }
+
+    .slider-error {
+        background: var(--background-card-dark, #1f2937);
+    }
+
+    .thumbnail-number {
+        background: #1e3a8a;
+        color: #bfdbfe;
+    }
+}
+
+/* ===============================
+     PRINT STYLES
+     =============================== */
+
+@media print {
+    .before-after-slider-container {
+        break-inside: avoid;
+        height: auto;
+    }
+
+    .slider-thumbnails-area {
+        display: none;
+    }
+
+    .slider-display-area {
+        width: 100%;
+        height: 400px;
+    }
+
+    .slider-caption {
+        background: #000000;
+        color: #ffffff;
+    }
+
+    .react-compare-slider-handle {
+        display: none;
+    }
+}

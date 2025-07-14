@@ -1,0 +1,522 @@
+/* src/components/SectionRationale/sectionRationaleGrid.css */
+
+/* ============================
+   📖 SECTION RATIONALE GRID - MATCHING ABOUT SECTION
+   Grid layout with consistent About section styling
+   UPDATED: Following About section patterns for consistency
+============================ */
+
+/* Wrapper matching About section cards */
+.rationale-grid {
+    background: var(--background-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-lg);
+    margin: var(--spacing-md) 0;
+    transition: all var(--transition-default);
+    position: relative;
+
+    /* Entry animation matching About section */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: rationaleGridFadeIn 0.6s ease-out 0.1s forwards;
+}
+
+/* Subtle left accent border matching About intro */
+.rationale-grid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--color-accent);
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    opacity: 0.6;
+    transition: opacity var(--transition-default);
+}
+
+.rationale-grid:hover {
+    background: var(--background-light);
+    transform: var(--translate-y-sm);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-accent-light);
+}
+
+.rationale-grid:hover::before {
+    opacity: 1;
+}
+
+/* Section title matching About section titles */
+.rationale-grid .section-title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h4);
+    font-weight: 600;
+    color: var(--primary-text);
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    text-align: center;
+}
+
+/* Title underline matching About section pattern */
+.rationale-grid .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg,
+            var(--color-accent-light) 0%,
+            var(--color-accent) 50%,
+            var(--color-accent-light) 100%);
+    border-radius: var(--radius-sm);
+}
+
+/* Description paragraphs matching About intro styling */
+.rationale-grid .rationale-description {
+    margin-bottom: var(--spacing-lg);
+    text-align: left;
+}
+
+.rationale-grid .rationale-description p {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+    color: var(--secondary-text);
+    margin: 0 0 var(--spacing-sm) 0;
+    position: relative;
+    z-index: 2;
+}
+
+.rationale-grid .rationale-description p:last-child {
+    margin-bottom: 0;
+}
+
+/* Enhanced typography matching About section */
+.rationale-grid .rationale-description strong {
+    color: var(--primary-text);
+    font-weight: 600;
+}
+
+.rationale-grid .rationale-description em {
+    color: var(--color-accent);
+    font-style: normal;
+    font-weight: 500;
+}
+
+/* Grid of categories matching Skills card layout */
+.rationale-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+/* Individual category block matching Skills card styling */
+.rationale-category-block {
+    background: var(--background-light);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    transition: all var(--transition-default);
+    position: relative;
+    box-shadow: var(--shadow-sm);
+
+    /* Staggered animation */
+    opacity: 0;
+    transform: translateY(10px);
+    animation: categoryBlockFadeIn 0.6s ease-out forwards;
+}
+
+.rationale-category-block:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.rationale-category-block:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.rationale-category-block:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.rationale-category-block:nth-child(4) {
+    animation-delay: 0.5s;
+}
+
+.rationale-category-block:hover {
+    transform: var(--translate-y-sm);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-accent-light);
+}
+
+/* Category heading matching Skills title styling */
+.category-title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h6);
+    font-weight: 600;
+    color: var(--primary-text);
+    margin: 0 0 var(--spacing-sm) 0;
+    text-align: center;
+    position: relative;
+}
+
+/* Category title underline */
+.category-title::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 2px;
+    background: var(--color-accent);
+    border-radius: var(--radius-sm);
+}
+
+/* List inside each block matching Skills list format */
+.category-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.category-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs);
+    transition: all var(--transition-default);
+    border-radius: var(--radius-sm);
+    position: relative;
+}
+
+.category-list li:hover {
+    background: rgba(14, 175, 251, 0.05);
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+}
+
+/* Bullet point styling */
+.category-list li::before {
+    content: '•';
+    color: var(--color-accent);
+    font-weight: bold;
+    font-size: var(--font-size-caption);
+    flex-shrink: 0;
+    width: 6px;
+    margin-top: 1px;
+}
+
+/* List item text */
+.category-list li {
+    font-family: var(--font-body);
+    font-size: var(--font-size-caption);
+    color: var(--secondary-text);
+    line-height: var(--line-height-small);
+    transition: color var(--transition-default);
+}
+
+.category-list li:hover {
+    color: var(--primary-text);
+}
+
+/* Final info section matching About contact styling */
+.rationale-grid .rationale-final {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.rationale-grid .rationale-final p {
+    font-family: var(--font-body);
+    font-size: var(--font-size-small);
+    color: var(--secondary-text);
+    margin: 0 0 var(--spacing-xs) 0;
+    transition: color var(--transition-default);
+}
+
+.rationale-grid .rationale-final p:last-child {
+    margin-bottom: 0;
+}
+
+.rationale-grid .rationale-final strong {
+    color: var(--primary-text);
+    font-weight: 600;
+}
+
+/* Entry animations */
+@keyframes rationaleGridFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes categoryBlockFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 1024px) {
+    .rationale-grid {
+        padding: var(--spacing-md);
+        margin: var(--spacing-lg) 0;
+    }
+
+    .rationale-grid .section-title {
+        font-size: var(--font-size-h5);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .rationale-grid .section-title::after {
+        width: 40px;
+        height: 2px;
+        bottom: -6px;
+    }
+
+    .rationale-categories {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: var(--spacing-md);
+    }
+
+    .rationale-category-block {
+        padding: var(--spacing-sm);
+    }
+}
+
+@media (max-width: 768px) {
+    .rationale-grid {
+        padding: var(--spacing-sm);
+        border-radius: var(--radius-md);
+        margin: var(--spacing-md) 0;
+    }
+
+    .rationale-grid .section-title {
+        font-size: var(--font-size-h6);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .rationale-grid .section-title::after {
+        width: 30px;
+        height: 2px;
+        bottom: -4px;
+    }
+
+    .rationale-categories {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+        margin: var(--spacing-md) 0;
+    }
+
+    .rationale-category-block {
+        padding: var(--spacing-sm);
+        border-radius: var(--radius-sm);
+    }
+
+    .category-title {
+        font-size: var(--font-size-small);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .category-title::after {
+        width: 20px;
+        height: 1px;
+        bottom: -3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .rationale-grid {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border-radius: var(--radius-sm);
+    }
+
+    .rationale-grid .section-title {
+        font-size: var(--font-size-small);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .rationale-grid .section-title::after {
+        width: 25px;
+        height: 1px;
+        bottom: -3px;
+    }
+
+    .rationale-grid::before {
+        width: 3px;
+    }
+
+    .rationale-categories {
+        gap: var(--spacing-xs);
+    }
+
+    .rationale-category-block {
+        padding: var(--spacing-xs);
+    }
+
+    .category-title {
+        font-size: var(--font-size-caption);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .category-list li {
+        font-size: var(--font-size-xsm);
+    }
+}
+
+/* === ACCESSIBILITY & PREFERENCES === */
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .rationale-grid,
+    .rationale-category-block {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .rationale-grid:hover,
+    .rationale-category-block:hover {
+        transform: none;
+    }
+
+    .category-list li:hover {
+        transform: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .rationale-grid {
+        background: var(--background-card);
+        border: 2px solid var(--primary-text);
+    }
+
+    .rationale-grid::before {
+        background: var(--primary-text);
+    }
+
+    .rationale-grid:hover {
+        border-color: var(--color-accent);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .rationale-category-block {
+        background: var(--background-card);
+        border: 1px solid var(--primary-text);
+    }
+
+    .rationale-category-block:hover {
+        border-color: var(--color-accent);
+    }
+
+    .rationale-grid .section-title::after,
+    .category-title::after {
+        background: var(--primary-text);
+    }
+
+    .category-list li::before {
+        color: var(--primary-text);
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .rationale-grid {
+        background: var(--background-card-dark);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: var(--shadow-dark-md);
+    }
+
+    .rationale-grid:hover {
+        background: rgba(255, 255, 255, 0.03);
+        border-color: var(--color-accent-medium);
+        box-shadow: var(--shadow-dark-lg);
+    }
+
+    .rationale-grid::before {
+        background: var(--color-accent-medium);
+    }
+
+    .rationale-category-block {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: var(--shadow-dark-sm);
+    }
+
+    .rationale-category-block:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--color-accent-medium);
+        box-shadow: var(--shadow-dark-md);
+    }
+
+    .rationale-grid .section-title::after,
+    .category-title::after {
+        background: linear-gradient(90deg,
+                var(--color-accent-medium) 0%,
+                var(--color-accent) 50%,
+                var(--color-accent-medium) 100%);
+    }
+
+    .category-list li::before {
+        color: var(--color-accent-medium);
+    }
+
+    .rationale-grid .rationale-final {
+        border-top-color: rgba(255, 255, 255, 0.05);
+    }
+}
+
+/* Print styles */
+@media print {
+    .rationale-grid {
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: none;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        padding: var(--spacing-sm);
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .rationale-grid::before {
+        display: none;
+    }
+
+    .rationale-category-block {
+        background: white;
+        border: 1px solid #ddd;
+        box-shadow: none;
+        animation: none;
+        opacity: 1;
+        transform: none;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .rationale-grid .section-title::after,
+    .category-title::after {
+        background: #333;
+    }
+
+    .category-list li::before {
+        color: #333;
+    }
+
+    .rationale-grid .rationale-final {
+        border-top-color: #ccc;
+    }
+}
