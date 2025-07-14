@@ -6,15 +6,14 @@ import {
   Worker,
   Viewer,
   SpecialZoomLevel,
-  type RenderViewerProps,
 } from '@react-pdf-viewer/core';
 import {
   defaultLayoutPlugin,
 } from '@react-pdf-viewer/default-layout';
-// Be sure to import the styles:
+
+// Import styles
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
-import packageJson from '@/../package.json'; 
 
 interface PDFViewerProps {
   url: string;
@@ -31,9 +30,9 @@ export default function PDFViewer({
 }: PDFViewerProps) {
   const defaultLayout = defaultLayoutPlugin();
 
-  // PDF.js worker URL; pin to a version compatible with @react-pdf-viewer
-  const pdfjsVersion = packageJson.dependencies['pdfjs-dist'];  
-  const workerUrl = `https://unpkg.com/pdfjs-dist@${pdfjsVersion}/build/pdf.worker.min.js`;
+  // Use the matching worker version for @react-pdf-viewer
+  // This matches the API version "3.11.174"
+  const workerUrl = 'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
 
   return (
     <div style={{ height: '100%', position: 'relative' }}>

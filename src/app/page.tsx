@@ -3,14 +3,24 @@
 
 import React from 'react';
 import { Element } from 'react-scroll';
+import dynamic from 'next/dynamic';
 
 import AboutSection from '@/components/About';
 import BeforeAfterSlider from '@/components/BeforeAfterSlider';
 import MediaShowcase from '@/components/MediaShowcase';
-import PDFGallery from '@/components/PDFGallery';
 import VideoGrid from '@/components/VideoGrid';
 import ImageGrid from '@/components/ImageGrid';
 import Divider from '@/components/Base/SectionDivider/Divider';
+
+// Dynamically import PDFGallery to prevent SSR issues
+const PDFGallery = dynamic(() => import('@/components/PDFGallery'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex items-center justify-center h-64">
+      <div className="text-gray-600">Loading PDF Gallery...</div>
+    </div>
+  ),
+});
 
 import beforeAfterData from '@/data/media/beforeAfterSlider.json';
 import beforeAfterRationale from '@/data/content/beforeAfterRationale.json';
