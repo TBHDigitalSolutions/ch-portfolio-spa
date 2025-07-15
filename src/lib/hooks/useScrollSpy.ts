@@ -1,28 +1,45 @@
-import useScrollSpy from "@/lib/hooks/useScrollSpy";
+// src/lib/hooks/useScrollSpy.ts
+import { useState, useEffect } from 'react';
 
-const sectionIds = [
-  "before-after",
-  "documents",
-  "audio-video",
-  "corporate-videos",
-  "creative-videos",
-  "images",
-];
+/**
+ * useScrollSpy hook to track which section is currently visible
+ * @param sectionIds Array of section IDs to track
+ * @param options IntersectionObserver options
+ * @returns Currently active section ID
+ */
+export default function useScrollSpy(
+  sectionIds: string[],
+  options: IntersectionObserverInit = {
+    root: null,
+    rootMargin: '-20% 0px -70% 0px',
+    threshold: 0.1
+  }
+): string {
+  const [activeSection, setActiveSection] = useState<string>('');
 
-export default function Nav() {
-  const active = useScrollSpy(sectionIds);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
 
-  return (
-    <nav>
-      {sectionIds.map((id) => (
-        <Link
-          key={id}
-          href={`#${id}`}
-          className={active === id ? "text-primary font-bold" : ""}
-        >
-          {id.replace(/-/g, " ")}
-        </Link>
-      ))}
-    </nav>
-  );
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, options);
+
+    // Observe all sections
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [sectionIds, options]);
+
+  return activeSection;
 }

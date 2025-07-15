@@ -5,7 +5,7 @@ import React from 'react';
 import './aboutcontact.css';
 
 export type ContactLink = {
-  type: 'primary' | 'secondary';
+  type: string; // ✅ CHANGED: from 'primary' | 'secondary' to string to match JSON data
   label: string;
   href: string;
 };

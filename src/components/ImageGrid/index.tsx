@@ -1,79 +1,85 @@
-// src/components/ImageGrid/index.tsx
+// src/components/ImageGrid/index.tsx - Production Ready
 'use client';
 
 import React, { useMemo } from 'react';
+import clsx from 'clsx';
 import ImageCard from './ImageCard';
+import defaultImageGridData from '@/data/media/imageGrid.json';
 import { SectionRationale, SectionRationaleProps } from '@/components/SectionRationale';
-import imageGridRationale from '@/data/content/imageGridRationale.json';
+import type { ImageSize, ImageItem } from './types';
 import './imagegrid.css';
 
-export type ImageSize = 'small' | 'medium' | 'large' | 'wide' | 'tall';
-
-export interface ImageItem {
-  id: string;
-  src: string;
-  alt?: string;
-  caption?: string;
-  size?: ImageSize;
-  priority?: boolean;
-}
-
-interface ImageGridProps {
+export interface ImageGridProps {
+  /** Explicit image list; falls back to default JSON if empty */
   images?: ImageItem[];
+  /** Layout style: Instagram grid, Masonry, or Portfolio */
   variant?: 'instagram' | 'masonry' | 'portfolio';
+  /** Tight or normal spacing between items */
   spacing?: 'normal' | 'tight';
   /** Optional rationale block data */
   rationaleData?: SectionRationaleProps;
+  /** Additional wrapper class names */
+  className?: string;
 }
+
+// Balanced size pattern for useMemo
+const sizePatterns: ImageSize[] = [
+  'medium','small','large','small','small','wide',
+  'small','medium','small','tall','small','small',
+];
 
 export default function ImageGrid({
   images = [],
   variant = 'masonry',
   spacing = 'normal',
   rationaleData,
+  className,
 }: ImageGridProps) {
-  if (images.length === 0) return null;
-
-  // Prepare rationale data (prop override or default JSON)
-  const rationale: SectionRationaleProps =
-    rationaleData ?? (imageGridRationale as SectionRationaleProps);
-
-  // Assign sizes if missing
+  // Build processedImages with sizes
   const processedImages = useMemo(() => {
-    const patterns: ImageSize[] = [
-      'medium','small','large','small','small','wide',
-      'small','medium','small','tall','small','small'
-    ];
-    return images.map((img, i) =>
-      img.size ? img : { ...img, size: patterns[i % patterns.length] }
-    );
+    const validSizes: ImageSize[] = ['small', 'medium', 'large', 'wide', 'tall'];
+    const source = images.length ? images : defaultImageGridData;
+
+    return source.map((img, idx) => ({
+      ...img,
+      size: validSizes.includes(img.size as ImageSize)
+        ? (img.size as ImageSize)
+        : sizePatterns[idx % sizePatterns.length],
+    }));
   }, [images]);
 
-  const getContainerClasses = () => {
-    const base = 'image-grid-container';
-    const variantClass = `image-grid-${variant}`;
-    const spacingClass = spacing === 'tight' ? 'tight' : '';
-    return `${base} ${variantClass} ${spacingClass}`.trim();
-  };
+  // Early return if no items
+  if (!processedImages.length) {
+    return (
+      <div className="image-grid-empty">
+        <p>No images to display.</p>
+      </div>
+    );
+  }
+
+  // Compute grid classes
+  const gridClasses = clsx(
+    'image-grid',
+    `image-grid-${variant}`,
+    spacing === 'tight' && 'spacing-tight'
+  );
 
   return (
-    <div>
-      {/* Rationale block above the grid */}
-      <SectionRationale {...rationale} />
+    <section className={clsx('image-grid-section', className)}>
+      {/* Optional rationale above */}
+      {rationaleData && <SectionRationale {...rationaleData} />}
 
-      <div className={getContainerClasses()}>
-        {processedImages.map((img, idx) => (
-          <ImageCard
-            key={img.id}
-            id={img.id}
-            src={img.src}
-            alt={img.alt}
-            caption={img.caption}
-            size={img.size}
-            priority={img.priority || idx < 4}
-          />
-        ))}
+      <div className="image-grid-container">
+        <div className={gridClasses}>
+          {processedImages.map(item => (
+            <ImageCard
+              key={item.id}
+              {...item}
+              priority={item.priority}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

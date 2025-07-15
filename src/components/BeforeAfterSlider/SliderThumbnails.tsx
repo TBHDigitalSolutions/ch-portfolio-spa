@@ -47,7 +47,8 @@ const SliderThumbnails = memo<SliderThumbnailsProps>(function SliderThumbnails({
 
   // Handle thumbnail load error
   const handleThumbnailError = useCallback((itemId: string) => {
-    console.warn(`Failed to load thumbnail for item: ${itemId}`);
+    // ✅ FIXED: Removed console.warn to fix ESLint error
+    // Use proper error handling/logging if needed
     setErrorThumbnails(prev => new Set([...prev, itemId]));
   }, []);
 
@@ -85,76 +86,62 @@ const SliderThumbnails = memo<SliderThumbnailsProps>(function SliderThumbnails({
       }`}
       role="tablist"
       aria-orientation={isVerticalLayout ? "vertical" : "horizontal"}
-      aria-label="Before and after image selection"
+      aria-label="Before and after image thumbnails"
     >
-      {items.map((item, idx) => {
-        const isActive = idx === selectedIndex;
+      {items.map((item, index) => {
+        const isSelected = index === selectedIndex;
         const isLoaded = loadedThumbnails.has(item.id);
         const hasError = errorThumbnails.has(item.id);
-        
+
         return (
           <button
             key={item.id}
-            onClick={() => onSelect(idx)}
-            onKeyDown={(e) => handleKeyDown(e, idx)}
-            className={`slider-thumbnail-btn ${isActive ? 'active' : ''}`}
+            type="button"
+            className={`slider-thumbnail-btn ${isSelected ? "active" : ""}`}
+            onClick={() => onSelect(index)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
             role="tab"
-            aria-selected={isActive}
-            aria-controls="slider-display"
-            aria-label={`Show ${item.caption} comparison (${idx + 1} of ${items.length})`}
-            id={`thumb-${item.id}`}
-            tabIndex={isActive ? 0 : -1}
-            style={{ '--item-index': idx } as React.CSSProperties}
+            aria-selected={isSelected}
+            aria-label={`View ${item.caption || `image ${index + 1}`}`}
+            tabIndex={isSelected ? 0 : -1}
           >
-            {/* Thumbnail Image Container - Video Card Style */}
             <div className="thumbnail-image-container">
               {!hasError ? (
                 <Image
                   src={item.thumbnail}
-                  alt={`Thumbnail for ${item.caption}`}
-                  width={400}
-                  height={225}
-                  sizes="(max-width: 768px) 140px, 200px"
-                  className={`thumbnail-image ${isLoaded ? 'loaded' : ''}`}
+                  alt={item.caption || `Thumbnail ${index + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 100px, 150px"
+                  className={`thumbnail-image ${isLoaded ? "loaded" : ""}`}
                   onLoad={() => handleThumbnailLoad(item.id)}
                   onError={() => handleThumbnailError(item.id)}
-                  priority={idx < 3} // Load first 3 thumbnails with priority
                 />
               ) : (
-                /* Fallback content for failed thumbnails */
                 <div className="thumbnail-fallback">
                   <div className="fallback-icon">🖼️</div>
-                  <span className="fallback-text">Image</span>
+                  <div className="fallback-text">Image</div>
                 </div>
               )}
 
-              {/* Loading spinner */}
               {!isLoaded && !hasError && (
                 <div className="thumbnail-loading">
-                  <div className="loading-spinner-small"></div>
+                  <div className="loading-spinner" />
                 </div>
               )}
 
-              {/* Active indicator - Video Card Style */}
-              {isActive && (
+              {isSelected && (
                 <div className="thumbnail-active-indicator">
                   <div className="active-badge">✓</div>
                 </div>
               )}
             </div>
 
-            {/* Card Content - Video Card Style */}
             <div className="thumbnail-content">
-              {/* Caption Text - Styled like video title */}
-              <h6 className="thumbnail-caption">
-                {item.caption}
-              </h6>
-              
-              {/* Number indicator - Mobile Only, styled like video source */}
+              <p className="thumbnail-caption">
+                {item.caption || `Image ${index + 1}`}
+              </p>
               {!isVerticalLayout && (
-                <span className="thumbnail-number">
-                  {idx + 1} of {items.length}
-                </span>
+                <div className="thumbnail-number">{index + 1}</div>
               )}
             </div>
           </button>

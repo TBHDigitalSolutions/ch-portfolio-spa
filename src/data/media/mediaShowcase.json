@@ -1,5 +1,5 @@
 {
-  "video": [
+  "videos": [
     {
       "id": "real-estate-drone",
       "src": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/media-showcase/video/real-estate-drone.mp4",
@@ -30,6 +30,5 @@
       "thumbnail": "https://storage.googleapis.com/ch-portfolio-spa-content-bucket/assets/media-showcase/video/promo-video-sample-thumb.png",
       "title": "Artist/Content Creator Promo"
     }
-  ],
-  "audio": []
+  ]
 }

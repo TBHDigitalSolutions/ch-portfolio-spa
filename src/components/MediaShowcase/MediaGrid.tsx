@@ -1,49 +1,38 @@
-// src/components/MediaShowcase/MediaGrid.tsx - Production Ready with Title Overlays
+// src/components/MediaShowcase/MediaGrid.tsx - Video Only Implementation
 "use client";
 
 import React, { useState } from "react";
 import Image from "next/image";
 import { sanitizeCaption } from "@/lib/utils/formatCaption";
 
-export type MediaItem = {
+export type VideoItem = {
   id: string;
   src: string;
   title: string;
-  type: "audio" | "video";
-  thumbnail?: string;
+  thumbnail: string;
 };
 
 interface MediaGridProps {
-  items: MediaItem[];
-  onSelect: (item: MediaItem) => void;
+  videos: VideoItem[];
+  onSelect: (video: VideoItem) => void;
   selectedId?: string;
   variant?: "sidebar" | "grid-only";
 }
 
 // Enhanced thumbnail generation with fallback logic
-const getThumbnailUrl = (item: MediaItem): string => {
-  // 1️⃣ ALWAYS use the provided thumbnail first
-  if (item.thumbnail) {
-    console.log(`Using provided thumbnail for ${item.id}:`, item.thumbnail);
-    return item.thumbnail;
+const getThumbnailUrl = (video: VideoItem): string => {
+  // Always use the provided thumbnail first
+  if (video.thumbnail) {
+    return video.thumbnail;
   }
   
-  // 2️⃣ Fallback logic only if no thumbnail provided
-  if (item.type === "video") {
-    // Match JSON convention: -thumb.png
-    const fallbackThumb = item.src.replace(/\.(mp4|webm|mov)$/i, '-thumb.png');
-    console.log(`Generated video thumbnail for ${item.id}:`, fallbackThumb);
-    return fallbackThumb;
-  }
-  
-  // 3️⃣ Audio fallback
-  const audioFallback = '/assets/fallback/audio-placeholder.svg';
-  console.log(`Using audio fallback for ${item.id}:`, audioFallback);
-  return audioFallback;
+  // Fallback logic: replace video extension with -thumb.png
+  const fallbackThumb = video.src.replace(/\.(mp4|webm|mov)$/i, '-thumb.png');
+  return fallbackThumb;
 };
 
 export default function MediaGrid({
-  items,
+  videos,
   onSelect,
   selectedId,
   variant = "sidebar"
@@ -51,22 +40,20 @@ export default function MediaGrid({
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
-  if (!items?.length) {
+  if (!videos?.length) {
     return (
       <div className="media-grid-empty">
-        <p>No media items available</p>
+        <p>No videos available</p>
       </div>
     );
   }
 
-  const handleImageError = (itemId: string, thumbnailUrl: string) => {
-    console.warn(`❌ Thumbnail failed to load for ${itemId}:`, thumbnailUrl);
-    setImageErrors(prev => new Set([...prev, itemId]));
+  const handleImageError = (videoId: string) => {
+    setImageErrors(prev => new Set([...prev, videoId]));
   };
 
-  const handleImageLoad = (itemId: string, thumbnailUrl: string) => {
-    console.log(`✅ Thumbnail loaded successfully for ${itemId}:`, thumbnailUrl);
-    setLoadedImages(prev => new Set([...prev, itemId]));
+  const handleImageLoad = (videoId: string) => {
+    setLoadedImages(prev => new Set([...prev, videoId]));
   };
 
   const containerClass = variant === "grid-only" 
@@ -75,71 +62,60 @@ export default function MediaGrid({
 
   return (
     <div className={containerClass}>
-      {items.map((item, index) => {
-        const thumbnailUrl = getThumbnailUrl(item);
-        const safeTitle = sanitizeCaption(item.title);
-        const isSelected = item.id === selectedId;
-        const hasError = imageErrors.has(item.id);
-        const isLoaded = loadedImages.has(item.id);
+      {videos.map((video, index) => {
+        const thumbnailUrl = getThumbnailUrl(video);
+        const safeTitle = sanitizeCaption(video.title);
+        const isSelected = video.id === selectedId;
+        const hasError = imageErrors.has(video.id);
+        const isLoaded = loadedImages.has(video.id);
         
         return (
           <div 
-            key={item.id} 
+            key={video.id} 
             className={`media-grid-item ${isSelected ? 'selected' : ''}`}
             style={{ '--item-index': index } as React.CSSProperties}
           >
             <button
               type="button"
-              aria-label={`Play ${item.type}: ${safeTitle}`}
+              onClick={() => onSelect(video)}
+              className={`media-item-button ${isSelected ? 'active' : ''}`}
               aria-pressed={isSelected}
-              onClick={() => onSelect(item)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  onSelect(item);
-                }
-              }}
-              className="media-item-button"
+              aria-label={`Play video: ${safeTitle}`}
             >
               {/* Thumbnail container */}
               <div className="media-thumbnail-container">
                 {!hasError ? (
                   <Image
                     src={thumbnailUrl}
-                    alt={safeTitle}
+                    alt={`${safeTitle} thumbnail`}
                     fill
-                    sizes="(max-width: 768px) 120px, (max-width: 1024px) 140px, 200px"
+                    sizes="(max-width: 768px) 100px, 150px"
                     className={`media-thumbnail ${isLoaded ? 'loaded' : ''}`}
-                    onLoad={() => handleImageLoad(item.id, thumbnailUrl)}
-                    onError={() => handleImageError(item.id, thumbnailUrl)}
-                    priority={index < 4} // Load first 4 images eagerly
-                    unoptimized={thumbnailUrl.includes('.svg')} // Don't optimize SVGs
+                    onLoad={() => handleImageLoad(video.id)}
+                    onError={() => handleImageError(video.id)}
+                    priority={index < 4} // Priority load first 4 items
                   />
                 ) : (
                   <div className="media-thumbnail-fallback">
-                    <div className="fallback-icon">
-                      {item.type === "video" ? "🎬" : "🎵"}
-                    </div>
-                    <span className="fallback-text">{item.type}</span>
+                    <div className="fallback-icon">▶</div>
+                    <span className="fallback-text">Video</span>
                   </div>
                 )}
 
-                {/* ✅ NEW: Always visible title overlay */}
-                <div className="media-title-overlay">
-                  <span className="overlay-title">{safeTitle}</span>
-                </div>
+                {/* Loading spinner */}
+                {!isLoaded && !hasError && (
+                  <div className="media-loading-overlay">
+                    <div className="loading-spinner" />
+                  </div>
+                )}
 
-                {/* Media type indicator */}
-                <div className="media-type-indicator">
-                  {item.type === "video" ? "▶" : "♪"}
-                </div>
+                {/* Video type indicator */}
+                <div className="media-type-indicator">▶</div>
 
                 {/* Interactive hover overlay */}
                 <div className="media-hover-overlay">
                   <div className="overlay-content">
-                    <div className="play-icon">
-                      {item.type === "video" ? "▶" : "♪"}
-                    </div>
+                    <div className="play-icon">▶</div>
                     <span className="overlay-action-text">
                       {isSelected ? "Now Playing" : "Click to Play"}
                     </span>
@@ -154,12 +130,9 @@ export default function MediaGrid({
                 )}
               </div>
 
-              {/* Enhanced title below thumbnail */}
+              {/* Video title below thumbnail */}
               <div className="media-item-title">
                 <span className="title-text">{safeTitle}</span>
-                <span className="media-duration">
-                  {item.type === "video" ? "Video" : "Audio"}
-                </span>
               </div>
             </button>
           </div>

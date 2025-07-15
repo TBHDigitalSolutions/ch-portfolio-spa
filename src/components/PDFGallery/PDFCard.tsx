@@ -44,7 +44,6 @@ const PDFCard = memo<PDFCardProps>(function PDFCard({
         {/* Thumbnail */}
         <div className="pdf-thumbnail-container">
           <PDFThumbnail
-            url={document.url}
             thumbnail={thumbnail}
             alt={title}
           />

@@ -30,6 +30,20 @@ const BeforeAfterSlider = memo<BeforeAfterSliderProps>(function BeforeAfterSlide
   className = '',
   onSlideChange,
 }) {
+  // ✅ FIXED: Move ALL hooks to the top, before any conditionals
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  
+  const handleSlideChange = useCallback(
+    (index: number) => {
+      if (index !== selectedIndex && index >= 0 && index < items.length) {
+        setSelectedIndex(index);
+        onSlideChange?.(index, items[index]);
+      }
+    },
+    [selectedIndex, items, onSlideChange]
+  );
+
+  // ✅ Early return AFTER all hooks
   if (!items.length) {
     return (
       <div
@@ -42,19 +56,7 @@ const BeforeAfterSlider = memo<BeforeAfterSliderProps>(function BeforeAfterSlide
     );
   }
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const selected = items[selectedIndex];
-
-  const handleSlideChange = useCallback(
-    (index: number) => {
-      if (index !== selectedIndex && index >= 0 && index < items.length) {
-        setSelectedIndex(index);
-        onSlideChange?.(index, items[index]);
-      }
-    },
-    [selectedIndex, items, onSlideChange]
-  );
-
   const caption = truncateCaption(
     sanitizeCaption(selected.caption),
     60,

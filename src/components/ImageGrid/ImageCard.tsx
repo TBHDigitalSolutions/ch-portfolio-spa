@@ -1,4 +1,4 @@
-// src/components/ImageGrid/ImageCard.tsx - Optimized for fast loading and caching
+// src/components/ImageGrid/ImageCard.tsx - Production Ready with Debug Logging
 'use client';
 
 import React, {
@@ -10,18 +10,19 @@ import React, {
 import Image from 'next/image';
 import Lightbox from './Lightbox';
 import { sanitizeCaption } from '@/lib/utils/formatCaption';
-import { ImageSize } from './index';
+import type { ImageItem } from './types';
 
-interface ImageCardProps {
-  id: string;
-  src: string;
-  alt?: string;
-  caption?: string;
-  size?: ImageSize;
-  priority?: boolean;
+/**
+ * Props for ImageCard derive from the core ImageItem type.
+ */
+export interface ImageCardProps extends ImageItem {
   /** low-res placeholder for blur (optional) */
   blurDataURL?: string;
 }
+
+// Development logging utility
+const isDev = process.env.NODE_ENV === 'development';
+const debugWarn = isDev ? console.warn : () => {};
 
 export default function ImageCard({
   id,
@@ -35,15 +36,12 @@ export default function ImageCard({
   const [isOpen, setIsOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
-  const [ratio, setRatio] = useState(1);
-  const [rows, setRows] = useState(3);
   const [isHovered, setIsHovered] = useState(false);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const cardRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
   const safeAlt = sanitizeCaption(alt ?? caption ?? id);
 
-  // Reset when src changes
+  // Reset state when src changes
   useEffect(() => {
     setLoaded(false);
     setError(false);
@@ -69,80 +67,30 @@ export default function ImageCard({
 
     const preloadImg = new window.Image();
     preloadImg.onload = () => {
-      const naturalWidth = preloadImg.naturalWidth;
-      const naturalHeight = preloadImg.naturalHeight;
-      const r = naturalWidth / naturalHeight;
-      
-      setRatio(r);
-      setDimensions({ width: naturalWidth, height: naturalHeight });
-
-      // Compute how many rows to span
-      let span = 3;
-      switch (size) {
-        case 'small':
-          span = r > 1.2 ? 2 : r < 0.8 ? 3 : 2;
-          break;
-        case 'medium':
-          span = r > 1.5 ? 2 : r < 0.7 ? 4 : 3;
-          break;
-        case 'large':
-          span = r > 1.5 ? 3 : r < 0.7 ? 5 : 4;
-          break;
-        case 'wide':
-          span = 2;
-          break;
-        case 'tall':
-          span = r < 0.8 ? 6 : 5;
-          break;
-      }
-      setRows(span);
-
-      if (cardRef.current) {
-        cardRef.current.style.gridRowEnd = `span ${span}`;
-      }
+      setDimensions({
+        width: preloadImg.naturalWidth,
+        height: preloadImg.naturalHeight,
+      });
     };
-
     preloadImg.onerror = () => {
-      console.warn(`Pre-load failed for: ${src}`);
+      debugWarn(`Pre-load failed for: ${src}`);
       setError(true);
     };
-
     preloadImg.src = src;
-  }, [src, size]);
+  }, [src]);
 
-  // Handle Next.js Image load event
-  const handleImageLoad = useCallback(
-    (e: React.SyntheticEvent<HTMLImageElement>) => {
-      setLoaded(true);
-    },
-    []
-  );
-
+  // Handle Next.js Image load & error
+  const handleImageLoad = useCallback(() => setLoaded(true), []);
   const handleImageError = useCallback(() => {
-    console.warn(`Next.js Image load failed: ${src}`);
+    debugWarn(`Next.js Image load failed: ${src}`);
     setError(true);
     setLoaded(true);
   }, [src]);
 
-  // Dynamic aspect ratio class
-  const getAspectClass = () => {
-    if (ratio > 1.7) return 'aspect-video';
-    if (ratio < 0.6) return 'aspect-9-16';
-    if (ratio > 1.4) return 'aspect-4-3';
-    if (ratio < 0.7) return 'aspect-3-4';
-    if (ratio > 1.1) return 'aspect-5-4';
-    if (ratio < 0.9) return 'aspect-4-5';
-    return 'aspect-square';
-  };
-
-  // Classes
-  const sizeClass = `image-card-${size}`;
-  const aspectClass = getAspectClass();
-
+  // CSS classes
   const classes = [
     'image-card',
-    sizeClass,
-    aspectClass,
+    `image-card-${size}`,
     priority && 'priority',
     loaded && 'loaded',
     isHovered && 'hovered',
@@ -150,33 +98,17 @@ export default function ImageCard({
     .filter(Boolean)
     .join(' ');
 
-  // Generate blur placeholder if not provided
+  // Blur placeholder fallback
   const getBlurDataURL = () => {
     if (blurDataURL) return blurDataURL;
-    
-    // Generate a simple gradient blur placeholder
-    const canvas = document.createElement('canvas');
-    canvas.width = 10;
-    canvas.height = 10;
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      const gradient = ctx.createLinearGradient(0, 0, 10, 10);
-      gradient.addColorStop(0, '#f3f4f6');
-      gradient.addColorStop(1, '#e5e7eb');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, 10, 10);
-      return canvas.toDataURL();
-    }
-    return 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R/Huf/Z';
+    return 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=';
   };
 
-  // Sizes prop for responsive images
-  const getSizes = () => {
-    if (size === 'large' || size === 'wide') {
-      return '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw';
-    }
-    return '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw';
-  };
+  // Responsive sizes attribute
+  const getSizes = () =>
+    size === 'large' || size === 'wide'
+      ? '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+      : '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw';
 
   return (
     <>
@@ -186,10 +118,6 @@ export default function ImageCard({
         tabIndex={0}
         aria-label={`View image: ${safeAlt}`}
         className={classes}
-        style={{
-          '--aspect-ratio': ratio,
-          '--grid-rows': rows,
-        } as React.CSSProperties}
         onDoubleClick={openLB}
         onKeyDown={onKeyDown}
         onMouseEnter={() => setIsHovered(true)}
@@ -197,7 +125,6 @@ export default function ImageCard({
       >
         {!error && dimensions.width > 0 ? (
           <Image
-            ref={imageRef}
             src={src}
             alt={safeAlt}
             width={dimensions.width}
@@ -209,11 +136,7 @@ export default function ImageCard({
             onLoad={handleImageLoad}
             onError={handleImageError}
             className="image-card-img"
-            style={{
-              width: '100%',
-              height: 'auto',
-              objectFit: 'cover',
-            }}
+            style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
           />
         ) : error ? (
           <div className="image-card-fallback">

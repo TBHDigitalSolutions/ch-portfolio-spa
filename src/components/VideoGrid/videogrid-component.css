@@ -23,20 +23,28 @@
 
 /* Section Layouts */
 .video-section {
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     min-height: 600px;
     /* Ensure section has height */
 }
 
 .section-title {
-    font-size: 1.75rem;
-    font-weight: 600;
-    color: #374151;
-    margin-bottom: 2rem;
-    text-align: center;
-    position: relative;
     font-family: var(--font-heading);
-    line-height: var(--line-height-h2);
+    font-size: var(--font-size-h4);
+    font-weight: 600;
+    color: var(--primary-text);
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    text-align: center;
+
+    /* Simple gradient text effect */
+    background: linear-gradient(135deg,
+    var(--color-soft-black) 0%,
+    var(--color-accent) 50%,
+    var(--color-soft-black) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .section-title::after {

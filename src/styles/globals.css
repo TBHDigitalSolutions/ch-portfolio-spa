@@ -1,4 +1,4 @@
-/* src/app/globals.css - Updated with TBH Root Variables - Navigation CSS Removed */
+/* src/app/globals.css - Updated with TBH Root Variables - Conflicts Removed */
 
 @import '../styles/root.css';
 @import "../styles/_fonts.css";
@@ -13,7 +13,7 @@
    ================================= */
 @layer base {
   :root {
-    /* Map old variables to new TBH variables for backward compatibility */
+    /* Core mapping for backward compatibility */
     --color-bg: var(--background-card);
     --color-fg: var(--primary-text);
     --color-primary: var(--color-accent);
@@ -23,66 +23,20 @@
     --color-secondary-hover: var(--color-accent-hover);
     --color-muted: var(--muted-text);
 
-    /* Keep existing semantic colors but enhance with TBH system */
+    /* Semantic colors */
     --color-error: var(--color-danger);
     --color-warning: var(--color-warning);
     --color-info: var(--color-info);
 
-    /* Enhanced gray scale using TBH naming */
-    --color-gray-50: var(--background-light);
-    --color-gray-100: var(--background-light-2);
-    --color-gray-200: var(--color-light-grey);
-    --color-gray-300: var(--color-light-grey);
-    --color-gray-400: var(--secondary-text);
-    --color-gray-500: var(--muted-text);
-    --color-gray-600: var(--secondary-text);
-    --color-gray-700: var(--color-dark-charcoal);
-    --color-gray-800: var(--background-medium);
-    --color-gray-900: var(--color-soft-black);
-
-    /* Blue scale mapped to TBH accent system */
-    --color-blue-50: var(--color-accent-light);
-    --color-blue-100: var(--color-accent-medium);
-    --color-blue-500: var(--color-accent);
-    --color-blue-600: var(--color-accent-hover);
-    --color-blue-900: var(--color-soft-black);
-
-    /* Typography system enhanced */
+    /* Typography system */
     --font-sans: var(--font-body);
     --font-mono: "ui-monospace", var(--font-body);
-
-    /* Enhanced shadows using TBH system */
-    --shadow-sm: var(--shadow-sm);
-    --shadow-md: var(--shadow-md);
-    --shadow-lg: var(--shadow-lg);
-    --shadow-xl: var(--shadow-xl);
-
-    /* Enhanced border radius using TBH system */
-    --radius-sm: var(--radius-sm);
-    --radius-md: var(--radius-md);
-    --radius-lg: var(--radius-lg);
-    --radius-xl: var(--radius-xl);
-
-    /* Enhanced transitions using TBH system */
-    --transition: var(--transition-default);
-    --transition-fast: var(--transition-fast);
-    --transition-slow: var(--transition-slow);
-
-    /* Enhanced z-index using TBH system */
-    --z-dropdown: var(--z-index-dropdown);
-    --z-sticky: var(--z-index-high);
-    --z-fixed: var(--z-index-navigation);
-    --z-modal-backdrop: var(--z-index-modal);
-    --z-modal: var(--z-index-modal);
-    --z-popover: var(--z-index-dropdown);
-    --z-tooltip: var(--z-index-tooltip);
-    --z-toast: var(--z-index-tooltip);
 
     /* Border color variable */
     --border-color: rgba(0, 0, 0, 0.1);
   }
 
-  /* Enhanced Dark Mode using TBH system */
+  /* Dark Mode */
   @media (prefers-color-scheme: dark) {
     :root {
       --color-bg: var(--background-card-dark);
@@ -94,35 +48,16 @@
       --color-secondary-hover: var(--color-accent-hover);
       --color-muted: var(--muted-text);
 
-      /* Dark mode gray scale */
-      --color-gray-50: var(--background-dark);
-      --color-gray-100: var(--background-medium);
-      --color-gray-200: var(--color-dark-charcoal);
-      --color-gray-300: var(--secondary-text);
-      --color-gray-400: var(--muted-text);
-      --color-gray-500: var(--color-light-grey);
-      --color-gray-600: var(--color-off-white);
-      --color-gray-700: var(--color-off-white);
-      --color-gray-800: var(--color-off-white);
-      --color-gray-900: var(--color-off-white);
-
-      /* Dark mode blue scale */
-      --color-blue-50: var(--background-dark);
-      --color-blue-100: var(--background-medium);
-      --color-blue-500: var(--color-accent);
-      --color-blue-600: var(--color-accent-hover);
-      --color-blue-900: var(--color-off-white);
-
       /* Dark mode border color */
       --border-color: rgba(255, 255, 255, 0.1);
     }
   }
 
   /* =================================
-     ENHANCED BASE STYLES WITH TBH SYSTEM
+     BASE STYLES WITH TBH SYSTEM
      ================================= */
 
-  /* Box Model & Scrolling Enhanced */
+  /* Box Model & Scrolling */
   html {
     box-sizing: border-box;
     scroll-behavior: smooth;
@@ -152,13 +87,11 @@
     line-height: var(--line-height-body);
   }
 
-  
-
   /* =================================
-     ENHANCED INTERACTIVE ELEMENTS
+     INTERACTIVE ELEMENTS
      ================================= */
 
-  /* Links Enhanced */
+  /* Links */
   a {
     color: var(--color-accent);
     text-decoration: none;
@@ -176,7 +109,7 @@
     outline-offset: var(--focus-outline-offset);
   }
 
-  /* Enhanced underline effect */
+  /* Enhanced underline effect for content links */
   .content a {
     text-decoration: underline;
     text-decoration-color: var(--color-accent);
@@ -188,10 +121,10 @@
     text-decoration-color: var(--color-accent-hover);
   }
 
-  /* ✅ UPDATED: Scoped Button Styling - Excludes VideoGrid components */
+  /* Scoped Button Styling - Excludes VideoGrid and ImageGrid components */
   .content button,
   .footer button,
-  button:not([class*="video"]):not([class*="player"]):not([class*="control"]):not([class*="media"]):not([class*="retry"]):not([class*="nav"]):not([class*="mobile-menu"]):not([class*="hamburger"]) {
+  button:not([class*="video"]):not([class*="player"]):not([class*="control"]):not([class*="media"]):not([class*="retry"]):not([class*="nav"]):not([class*="mobile-menu"]):not([class*="hamburger"]):not([class*="image-card"]):not([class*="lightbox"]):not([class*="image-grid"]) {
     font-family: var(--font-body);
     font-weight: 500;
     border-radius: var(--radius-md);
@@ -208,19 +141,19 @@
 
   .content button:focus,
   .footer button:focus,
-  button:not([class*="video"]):not([class*="player"]):not([class*="control"]):not([class*="media"]):not([class*="retry"]):not([class*="nav"]):not([class*="mobile-menu"]):not([class*="hamburger"]):focus {
+  button:not([class*="video"]):not([class*="player"]):not([class*="control"]):not([class*="media"]):not([class*="retry"]):not([class*="nav"]):not([class*="mobile-menu"]):not([class*="hamburger"]):not([class*="image-card"]):not([class*="lightbox"]):not([class*="image-grid"]):focus {
     outline: var(--focus-outline-width) solid var(--focus-outline-color);
     outline-offset: var(--focus-outline-offset);
   }
 
   .content button:disabled,
   .footer button:disabled,
-  button:not([class*="video"]):not([class*="player"]):not([class*="control"]):not([class*="media"]):not([class*="retry"]):not([class*="nav"]):not([class*="mobile-menu"]):not([class*="hamburger"]):disabled {
+  button:not([class*="video"]):not([class*="player"]):not([class*="control"]):not([class*="media"]):not([class*="retry"]):not([class*="nav"]):not([class*="mobile-menu"]):not([class*="hamburger"]):not([class*="image-card"]):not([class*="lightbox"]):not([class*="image-grid"]):disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
 
-  /* Form Elements Enhanced */
+  /* Form Elements */
   input,
   textarea,
   select {
@@ -243,10 +176,10 @@
   }
 
   /* =================================
-     ENHANCED LAYOUT COMPONENTS
+     LAYOUT COMPONENTS
      ================================= */
 
-  /* Enhanced Skip Link */
+  /* Skip Link */
   .skip-link {
     position: absolute;
     top: -9999px;
@@ -268,7 +201,7 @@
     left: var(--spacing-md);
   }
 
-  /* Enhanced Main Content */
+  /* Main Content */
   .main-content {
     padding-top: calc(var(--header-height) + var(--spacing-md));
     padding-bottom: var(--spacing-lg);
@@ -283,7 +216,7 @@
     gap: var(--spacing-xxl);
   }
 
-  /* Enhanced Container */
+  /* Container */
   .container {
     margin-left: auto;
     margin-right: auto;
@@ -292,7 +225,7 @@
     width: 100%;
   }
 
-  /* Enhanced Text Selection */
+  /* Text Selection */
   ::selection {
     background-color: var(--color-accent);
     color: var(--color-off-white);
@@ -303,7 +236,7 @@
     color: var(--color-off-white);
   }
 
-  /* Enhanced Scrollbar Styling */
+  /* Scrollbar Styling */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -324,7 +257,7 @@
     background: var(--muted-text);
   }
 
-  /* ✅ UPDATED: Renamed loading states to avoid VideoGrid conflicts */
+  /* Global loading states - renamed to avoid conflicts */
   .global-loading-shimmer {
     background: linear-gradient(90deg,
         var(--color-light-grey) 25%,
@@ -344,53 +277,38 @@
     }
   }
 
-  /* ✅ UPDATED: Renamed animation utilities to avoid VideoGrid conflicts */
+  /* Global animation utilities - renamed to avoid conflicts */
   .global-fade-in {
     opacity: 0;
-    animation: fadeIn var(--animation-duration-normal) var(--animation-easing) forwards;
+    animation: globalFadeIn var(--animation-duration-normal) var(--animation-easing) forwards;
   }
 
   .global-slide-up {
     opacity: 0;
     transform: translateY(20px);
-    animation: slideUp var(--animation-duration-normal) var(--animation-easing) forwards;
+    animation: globalSlideUp var(--animation-duration-normal) var(--animation-easing) forwards;
   }
 
-  @keyframes fadeIn {
+  @keyframes globalFadeIn {
     to {
       opacity: 1;
     }
   }
 
-  @keyframes slideUp {
+  @keyframes globalSlideUp {
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
-  /* Enhanced Focus for Better Accessibility */
+  /* Focus for Better Accessibility */
   .focus-visible:focus {
     outline: var(--focus-outline-width) solid var(--focus-outline-color);
     outline-offset: var(--focus-outline-offset);
   }
 
-  /* Enhanced Card Component Base */
-  .card {
-    background: var(--background-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition-default);
-    overflow: hidden;
-  }
-
-  .card:hover {
-    box-shadow: var(--shadow-lg);
-    transform: var(--translate-y-sm);
-  }
-
-  /* Enhanced Section Spacing */
+  /* Section Spacing */
   .section {
     padding: var(--section-padding-large);
   }
@@ -402,7 +320,7 @@
   }
 
   /* =================================
-     ENHANCED RESPONSIVE DESIGN
+     RESPONSIVE DESIGN
      ================================= */
 
   /* Mobile-first responsive updates */
@@ -439,10 +357,10 @@
   }
 
   /* =================================
-     ENHANCED ACCESSIBILITY & PREFERENCES
+     ACCESSIBILITY & PREFERENCES
      ================================= */
 
-  /* Enhanced reduced motion support */
+  /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
 
     *,
@@ -459,7 +377,7 @@
     }
   }
 
-  /* Enhanced high contrast mode */
+  /* High contrast mode */
   @media (prefers-contrast: high) {
     :root {
       --color-accent: #0000ff;
@@ -470,8 +388,7 @@
 
     .content button,
     .footer button,
-    button:not([class*="video"]):not([class*="player"]):not([class*="control"]):not([class*="media"]):not([class*="retry"]):not([class*="nav"]):not([class*="mobile-menu"]):not([class*="hamburger"]),
-    .card {
+    button:not([class*="video"]):not([class*="player"]):not([class*="control"]):not([class*="media"]):not([class*="retry"]):not([class*="nav"]):not([class*="mobile-menu"]):not([class*="hamburger"]):not([class*="image-card"]):not([class*="lightbox"]):not([class*="image-grid"]) {
       border: 2px solid var(--primary-text);
     }
 
@@ -482,7 +399,7 @@
     }
   }
 
-  /* Enhanced print styles */
+  /* Print styles */
   @media print {
     * {
       background: white !important;

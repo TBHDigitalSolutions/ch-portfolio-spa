@@ -1,7 +1,8 @@
-// src/components/ImageGrid/Lightbox.tsx
-"use client";
+// src/components/ImageGrid/Lightbox.tsx - Production Ready with Next.js Image
+'use client';
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from 'react';
+import Image from 'next/image';
 
 export interface LightboxProps {
   isOpen: boolean;
@@ -10,6 +11,10 @@ export interface LightboxProps {
   caption?: string;
   onClose: () => void;
 }
+
+// Development logging utility
+const isDev = process.env.NODE_ENV === 'development';
+const debugLog = isDev ? console.log : () => {};
 
 export default function Lightbox({
   isOpen,
@@ -20,47 +25,76 @@ export default function Lightbox({
 }: LightboxProps) {
   const [mounted, setMounted] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageDimensions, setImageDimensions] = useState({ width: 800, height: 600 });
 
-  // Memoize the close function to prevent unnecessary re-renders
+  // Close handler
   const handleClose = useCallback(() => {
     onClose();
   }, [onClose]);
 
+  // Preload image to get dimensions for Next.js Image component
+  useEffect(() => {
+    if (!src) return;
+
+    const preloadImg = new window.Image();
+    preloadImg.onload = () => {
+      setImageDimensions({
+        width: preloadImg.naturalWidth,
+        height: preloadImg.naturalHeight,
+      });
+      debugLog('Lightbox: Image dimensions loaded', {
+        width: preloadImg.naturalWidth,
+        height: preloadImg.naturalHeight,
+        src
+      });
+    };
+    preloadImg.onerror = () => {
+      debugLog('Lightbox: Failed to preload image', src);
+    };
+    preloadImg.src = src;
+  }, [src]);
+
+  // Manage mount state and ESC key listener
   useEffect(() => {
     setMounted(true);
-    
-    // Handle ESC key to close modal
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         handleClose();
       }
     };
 
     if (isOpen) {
-      document.addEventListener("keydown", handleKeyDown);
-      // Prevent body scroll when modal is open
-      document.body.style.overflow = "hidden";
-      // Focus management
-      const activeElement = document.activeElement as HTMLElement;
+      document.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+      debugLog('Lightbox: Opened', { src, alt });
+      
       return () => {
-        document.removeEventListener("keydown", handleKeyDown);
-        document.body.style.overflow = "unset";
-        // Restore focus when closing
-        if (activeElement) {
-          activeElement.focus();
-        }
+        document.removeEventListener('keydown', handleKeyDown);
+        document.body.style.overflow = '';
       };
     }
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "unset";
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
     };
-  }, [isOpen, handleClose]);
+  }, [isOpen, handleClose, src, alt]);
 
-  // Reset image loaded state when src changes
+  // Reset loading flag when image source changes
   useEffect(() => {
     setImageLoaded(false);
+  }, [src]);
+
+  // Handle image load success
+  const handleImageLoad = useCallback(() => {
+    setImageLoaded(true);
+    debugLog('Lightbox: Image loaded successfully', src);
+  }, [src]);
+
+  // Handle image load error
+  const handleImageError = useCallback(() => {
+    setImageLoaded(true); // Still set to true to hide loading spinner
+    debugLog('Lightbox: Image failed to load', src);
   }, [src]);
 
   // Don't render on server or when closed
@@ -69,61 +103,20 @@ export default function Lightbox({
   }
 
   return (
-    <div 
+    <div
       className="lightbox-overlay"
       onClick={handleClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="lightbox-image"
-      aria-describedby={caption ? "lightbox-caption" : undefined}
+      aria-describedby={caption ? 'lightbox-caption' : undefined}
     >
-      {/* Backdrop */}
       <div className="lightbox-backdrop" />
-      
-      {/* Modal Content */}
-      <div 
+
+      <div
         className="lightbox-content"
-        onClick={(e) => e.stopPropagation()}
+        onClick={e => e.stopPropagation()}
       >
-        {/* Close Button - FIXED */}
-        <button
-          onClick={handleClose}
-          className="lightbox-close"
-          aria-label="Close image viewer"
-          type="button"
-          autoFocus
-          style={{
-            position: 'absolute',
-            top: '1rem',
-            right: '1rem',
-            zIndex: 10,
-            background: 'rgba(0, 0, 0, 0.6)',
-            border: 'none',
-            borderRadius: '50%',
-            width: '48px',
-            height: '48px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            cursor: 'pointer',
-            transition: 'all 0.2s ease',
-            backdropFilter: 'blur(8px)'
-          }}
-        >
-          {/* Simple X character - more reliable than SVG */}
-          <span style={{
-            fontSize: '24px',
-            fontWeight: 'bold',
-            lineHeight: 1,
-            color: 'white'
-          }}>
-            ×
-          </span>
-        </button>
-
-        {/* Alternative: Fixed SVG approach */}
-        {/* 
         <button
           onClick={handleClose}
           className="lightbox-close"
@@ -131,52 +124,39 @@ export default function Lightbox({
           type="button"
           autoFocus
         >
-          <svg 
-            width="24" 
-            height="24" 
-            viewBox="0 0 24 24" 
-            fill="none"
-            className="close-icon"
-            aria-hidden="true"
-            style={{ color: 'white' }}
-          >
-            <path 
-              d="M18 6L6 18M6 6l12 12" 
-              stroke="white" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-            />
-          </svg>
+          <span className="lightbox-close-icon">×</span>
         </button>
-        */}
 
-        {/* Image Container */}
         <div className="lightbox-image-container">
           {!imageLoaded && (
             <div className="lightbox-loading">
-              <div className="loading-spinner large"></div>
+              <div className="loading-spinner large" />
             </div>
           )}
-          <img
+          <Image
             id="lightbox-image"
             src={src}
-            alt={alt}
+            alt={alt || caption || 'Lightbox image'}
+            width={imageDimensions.width}
+            height={imageDimensions.height}
             className={`lightbox-image ${imageLoaded ? 'loaded' : ''}`}
-            onLoad={() => setImageLoaded(true)}
-            onError={(e) => {
-              console.error('Failed to load lightbox image:', src);
-              setImageLoaded(true);
-            }}
+            onLoad={handleImageLoad}
+            onError={handleImageError}
+            draggable={false}
+            unoptimized={true} // For external URLs or if optimization causes issues
+            priority={true} // Since it's user-triggered content
+            quality={90} // High quality for lightbox viewing
+            sizes="(max-width: 768px) 95vw, (max-width: 1200px) 90vw, 1200px"
             style={{
+              width: '100%',
+              height: 'auto',
               maxWidth: '100%',
               maxHeight: '100%',
-              objectFit: 'contain'
+              objectFit: 'contain',
             }}
           />
         </div>
 
-        {/* Caption */}
         {caption && (
           <div id="lightbox-caption" className="lightbox-caption">
             {caption}

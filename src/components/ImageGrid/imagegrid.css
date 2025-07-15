@@ -1,64 +1,113 @@
-/* src/components/ImageGrid/imagegrid.css - Optimized for fast loading */
+/* src/components/ImageGrid/imagegrid.css - Optimized masonry layout with fixed lightbox */
 
-/* Base container styles */
-.image-grid-container {
-    width: 100%;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    max-width: 1200px;
+/* ===============================
+   SECTION WRAPPER
+   =============================== */
+.image-grid-section {
+    scroll-margin-top: var(--header-height);
+    padding: var(--section-padding-small) 0;
+    position: relative;
+    z-index: var(--z-index-base);
 }
 
-/* MASONRY LAYOUT - RECOMMENDED for no gaps */
+/* ===============================
+   CONTAINER STYLES
+   =============================== */
+.image-grid-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding-md);
+    position: relative;
+}
+
+/* ===============================
+   MASONRY LAYOUT - PRIMARY
+   =============================== */
 .image-grid-masonry {
-    columns: 5;
-    column-gap: 8px;
+    columns: 4;
+    column-gap: var(--grid-gap-medium);
     column-fill: balance;
-    /* Optimize for CLS (Cumulative Layout Shift) */
+
+    /* Performance optimizations */
     contain: layout style paint;
+    transform: translateZ(0);
 }
 
 .image-grid-masonry .image-card {
     break-inside: avoid;
-    margin-bottom: 8px;
+    margin-bottom: var(--grid-gap-medium);
     width: 100%;
-    display: inline-block;
-    height: auto;
-    /* GPU acceleration for smooth animations */
+    display: block;
+
+    /* GPU acceleration */
     transform: translateZ(0);
     will-change: auto;
 }
 
-/* Instagram grid fallback */
+/* ===============================
+   INSTAGRAM GRID LAYOUT
+   =============================== */
 .image-grid-instagram {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-auto-rows: 8px;
-    gap: 8px;
+    gap: var(--grid-gap-small);
     align-items: start;
 }
 
-/* Tight spacing variant */
-.image-grid-masonry.tight {
-    column-gap: 4px;
+.image-grid-instagram .image-card {
+    /* Dynamic grid row span will be set by JavaScript */
 }
 
-.image-grid-masonry.tight .image-card {
-    margin-bottom: 4px;
+/* ===============================
+   PORTFOLIO LAYOUT
+   =============================== */
+.image-grid-portfolio {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--grid-gap-large);
+    align-items: start;
 }
 
-/* OPTIMIZED CARD STYLES */
+.image-grid-portfolio .image-card {
+    width: 100%;
+    height: auto;
+}
+
+/* ===============================
+   SPACING VARIANTS
+   =============================== */
+.image-grid-masonry.spacing-tight {
+    column-gap: var(--grid-gap-small);
+}
+
+.image-grid-masonry.spacing-tight .image-card {
+    margin-bottom: var(--grid-gap-small);
+}
+
+.image-grid-instagram.spacing-tight {
+    gap: var(--grid-gap-small);
+}
+
+.image-grid-portfolio.spacing-tight {
+    gap: var(--grid-gap-medium);
+}
+
+/* ===============================
+   IMAGE CARD STYLES
+   =============================== */
 .image-card {
     position: relative;
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     cursor: pointer;
-    background-color: #f8f9fa;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    background-color: var(--background-light);
+    box-shadow: var(--shadow-sm);
 
-    /* Critical loading optimization */
+    /* Loading state */
     opacity: 0;
     transform: scale(0.98) translateY(10px);
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all var(--transition-default) cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     /* Performance optimizations */
     contain: layout style paint;
@@ -69,19 +118,26 @@
 .image-card.loaded {
     opacity: 1;
     transform: scale(1) translateY(0);
-    animation: fadeInUp 0.4s ease-out forwards;
-    animation-delay: calc(var(--item-index, 0) * 0.03s);
+    animation: fadeInUp var(--animation-duration-normal) ease-out forwards;
 }
 
 /* Enhanced hover effects */
 .image-card:hover {
-    transform: scale(1.02) translateY(-2px);
-    z-index: 20;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    transition: all 0.2s ease;
+    transform: scale(1.02) translateY(-4px);
+    z-index: var(--z-index-medium);
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-fast) ease;
 }
 
-/* NEXT.JS IMAGE OPTIMIZATION */
+/* Priority loading */
+.image-card.priority {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+/* ===============================
+   IMAGE OPTIMIZATION
+   =============================== */
 .image-card-img {
     width: 100% !important;
     height: auto !important;
@@ -95,7 +151,7 @@
 
     /* Smooth loading transition */
     opacity: 0;
-    transition: opacity 0.3s ease-in, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: opacity var(--transition-default) ease-in;
 }
 
 .image-card.loaded .image-card-img {
@@ -105,21 +161,12 @@
 .image-card:hover .image-card-img {
     transform: scale(1.05) translateZ(0);
     filter: brightness(1.05) contrast(1.05);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all var(--transition-slow) cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* PRIORITY LOADING */
-.image-card.priority {
-    order: -1;
-    opacity: 1;
-    transform: scale(1) translateY(0);
-}
-
-.image-card.priority .image-card-img {
-    opacity: 1;
-}
-
-/* OPTIMIZED LOADING STATES */
+/* ===============================
+   LOADING STATES
+   =============================== */
 .image-card-loading {
     position: absolute;
     top: 0;
@@ -129,7 +176,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: linear-gradient(135deg, var(--background-light) 0%, var(--color-light-grey) 100%);
     border-radius: inherit;
     min-height: 120px;
 
@@ -140,8 +187,8 @@
 .loading-spinner {
     width: 24px;
     height: 24px;
-    border: 2px solid #e5e7eb;
-    border-top: 2px solid #3b82f6;
+    border: 2px solid var(--color-light-grey);
+    border-top: 2px solid var(--color-accent);
     border-radius: 50%;
     animation: spin 1s linear infinite;
     transform: translateZ(0);
@@ -153,7 +200,9 @@
     border-width: 4px;
 }
 
-/* Error fallback */
+/* ===============================
+   ERROR FALLBACK
+   =============================== */
 .image-card-fallback {
     position: absolute;
     top: 0;
@@ -164,24 +213,26 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #f8f9fa;
+    background: var(--background-light);
     border-radius: inherit;
     min-height: 120px;
-    color: #6b7280;
+    color: var(--muted-text);
 }
 
 .fallback-icon {
     font-size: 2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--spacing-sm);
 }
 
 .fallback-text {
-    font-size: 0.875rem;
+    font-size: var(--font-size-small);
     text-align: center;
     opacity: 0.8;
 }
 
-/* ENHANCED HOVER OVERLAY */
+/* ===============================
+   HOVER OVERLAY
+   =============================== */
 .image-card-overlay {
     position: absolute;
     top: 0;
@@ -197,7 +248,7 @@
     opacity: 0;
     border-radius: inherit;
     backdrop-filter: blur(1px);
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast) ease;
     transform: translateZ(0);
 }
 
@@ -206,10 +257,10 @@
 }
 
 .image-card-overlay-content {
-    color: #ffffff;
+    color: var(--color-off-white);
     text-align: center;
     transform: translateY(5px);
-    transition: transform 0.2s ease;
+    transition: transform var(--transition-fast) ease;
 }
 
 .image-card:hover .image-card-overlay-content {
@@ -217,16 +268,16 @@
 }
 
 .overlay-text {
-    font-size: 0.75rem;
+    font-size: var(--font-size-caption);
     font-weight: 500;
-    margin-bottom: 0.25rem;
+    margin-bottom: var(--spacing-xs);
     opacity: 0.9;
 }
 
 .expand-icon {
     width: 20px;
     height: 20px;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast) ease;
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
 
@@ -234,63 +285,99 @@
     transform: scale(1.1);
 }
 
-/* ACCESSIBILITY IMPROVEMENTS */
+/* ===============================
+   SIZE VARIANTS FOR INSTAGRAM GRID
+   =============================== */
+.image-grid-instagram .image-card-small {
+    grid-column: span 1;
+}
+
+.image-grid-instagram .image-card-medium {
+    grid-column: span 1;
+}
+
+.image-grid-instagram .image-card-large {
+    grid-column: span 2;
+}
+
+.image-grid-instagram .image-card-wide {
+    grid-column: span 2;
+}
+
+.image-grid-instagram .image-card-tall {
+    grid-column: span 1;
+}
+
+/* ===============================
+   ACCESSIBILITY
+   =============================== */
 .image-card:focus {
-    outline: 2px solid #3b82f6;
-    outline-offset: 2px;
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: var(--focus-outline-offset);
 }
 
 .image-card:focus:not(:focus-visible) {
     outline: none;
 }
 
-/* RESPONSIVE BREAKPOINTS */
+/* ===============================
+   RESPONSIVE BREAKPOINTS
+   =============================== */
 @media (max-width: 1200px) {
     .image-grid-masonry {
-        columns: 4;
-        column-gap: 8px;
+        columns: 3;
+        column-gap: var(--grid-gap-medium);
+    }
+
+    .image-grid-container {
+        padding: 0 var(--container-padding-sm);
     }
 }
 
 @media (max-width: 768px) {
     .image-grid-masonry {
-        columns: 3;
-        column-gap: 6px;
+        columns: 2;
+        column-gap: var(--grid-gap-small);
     }
 
     .image-grid-masonry .image-card {
-        margin-bottom: 6px;
+        margin-bottom: var(--grid-gap-small);
     }
 
     .image-card:hover {
-        transform: scale(1.01) translateY(-1px);
+        transform: scale(1.01) translateY(-2px);
+    }
+
+    .image-grid-container {
+        padding: 0 var(--container-padding-xs);
     }
 }
 
 @media (max-width: 480px) {
     .image-grid-masonry {
-        columns: 2;
-        column-gap: 4px;
+        columns: 1;
+        column-gap: 0;
     }
 
     .image-grid-masonry .image-card {
-        margin-bottom: 4px;
-        border-radius: 6px;
-    }
-
-    .image-grid-container {
-        padding: 0 0.5rem;
-        margin: 1rem auto;
+        margin-bottom: var(--grid-gap-small);
+        border-radius: var(--radius-sm);
     }
 
     /* Reduce hover effects on mobile */
     .image-card:hover {
         transform: none;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .image-grid-section {
+        padding: var(--section-padding-small) 0;
     }
 }
 
-/* PERFORMANCE OPTIMIZATIONS */
+/* ===============================
+   PERFORMANCE OPTIMIZATIONS
+   =============================== */
 @media (prefers-reduced-motion: reduce) {
 
     .image-card,
@@ -307,7 +394,7 @@
     }
 }
 
-/* CRITICAL CSS OPTIMIZATIONS */
+/* Critical CSS optimizations */
 .image-card,
 .image-card-img {
     content-visibility: auto;
@@ -321,7 +408,9 @@
     transform: translateZ(0);
 }
 
-/* ANIMATIONS */
+/* ===============================
+   ANIMATIONS
+   =============================== */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -356,295 +445,380 @@
     }
 }
 
-/* SIZE VARIANTS FOR MASONRY */
-.image-grid-masonry .image-card-small,
-.image-grid-masonry .image-card-medium,
-.image-grid-masonry .image-card-large,
-.image-grid-masonry .image-card-wide,
-.image-grid-masonry .image-card-tall {
-    width: 100%;
-}
-
-/* INSTAGRAM GRID SIZE VARIANTS */
-.image-grid-instagram .image-card-small {
-    grid-column: span 1;
-}
-
-.image-grid-instagram .image-card-medium {
-    grid-column: span 1;
-}
-
-.image-grid-instagram .image-card-large {
-    grid-column: span 2;
-}
-
-.image-grid-instagram .image-card-wide {
-    grid-column: span 2;
-}
-
-.image-grid-instagram .image-card-tall {
-    grid-column: span 1;
-}
-
-/* PORTFOLIO LAYOUT */
-.image-grid-portfolio {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 12px;
-    align-items: start;
-}
-
-.image-grid-portfolio .image-card {
-    width: 100%;
-    height: auto;
-}
-
 /* ===============================
-   LIGHTBOX STYLES - UPDATED & FIXED
+   LIGHTBOX STYLES - PRODUCTION READY
+   Fixed according to detailed refactoring guide
    =============================== */
 
+/* Global box-sizing reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Overlay with minimal gutters - REDUCED PADDING */
 .lightbox-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 9999;
+    inset: 0;
+    z-index: var(--z-index-modal, 1000);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.9);
+    padding: 0;
+    /* Removed excessive padding that was pushing image down */
+    background: var(--overlay-backdrop, rgba(0, 0, 0, 0.95));
     backdrop-filter: blur(8px);
-    animation: fadeIn 0.3s ease-out;
+    animation: fadeIn var(--animation-duration-normal, 0.3s) var(--animation-easing, ease-out);
+    overflow: hidden;
+    touch-action: none;
+    cursor: zoom-out;
 }
 
 .lightbox-backdrop {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.85);
+    inset: 0;
+    background: var(--overlay-backdrop, rgba(0, 0, 0, 0.95));
     backdrop-filter: blur(4px);
 }
 
+/* --- ADJUSTED LIGHTBOX HEIGHT CONSTRAINTS --- */
 .lightbox-content {
     position: relative;
-    width: 90vw;
-    height: 90vh;
-    max-width: 1200px;
-    max-height: 800px;
-    background: transparent;
-    border-radius: 12px;
-    overflow: hidden;
-    animation: scaleIn 0.3s ease-out;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    height: auto;
+    /* Let image dictate height */
+    max-height: calc(100vh - var(--header-height, 80px) - var(--spacing-md, 20px));
+    /* Full viewport minus nav */
+    max-width: 95vw;
+    padding: 0;
+    background: transparent;
+    border-radius: var(--radius-lg, 12px);
+    animation: scaleIn var(--animation-duration-normal, 0.3s) var(--animation-easing, ease-out);
+    z-index: calc(var(--z-index-modal, 1000) + 1);
+    overflow: hidden;
+    cursor: default;
+    box-sizing: border-box;
 }
 
-/* ENHANCED LIGHTBOX CLOSE BUTTON - FIXED */
+/* Close button always visible and clickable */
 .lightbox-close {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 50;
-    background: rgba(0, 0, 0, 0.7);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
+    top: var(--spacing-xs, 8px);
+    right: var(--spacing-xs, 8px);
+    width: var(--player-control-size, 44px);
+    height: var(--player-control-size, 44px);
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-circle, 50%);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white !important;
+    color: var(--color-off-white, #f4f6f7) !important;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: transform var(--transition-fast, 0.15s ease), box-shadow var(--transition-fast, 0.15s ease);
     backdrop-filter: blur(12px);
-    font-size: 24px;
-    font-weight: bold;
+    font-size: var(--font-size-h5, 1.125rem);
     line-height: 1;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    z-index: calc(var(--z-index-modal, 1000) + 2);
+    box-shadow: var(--shadow-lg, 0 10px 15px rgba(0, 0, 0, 0.15));
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .lightbox-close:hover {
+    transform: var(--scale-sm, scale(1.05));
+    box-shadow: var(--glow-accent-hover, 0 0 20px rgba(59, 130, 246, 0.5));
     background: rgba(0, 0, 0, 0.9);
-    border-color: rgba(255, 255, 255, 0.4);
-    transform: scale(1.1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .lightbox-close:focus {
-    outline: 2px solid white;
-    outline-offset: 2px;
+    outline: var(--focus-outline-width, 2px) solid var(--focus-outline-color, #3b82f6);
+    outline-offset: var(--focus-outline-offset, 2px);
 }
 
 .lightbox-close:active {
-    transform: scale(0.95);
+    transform: scale(0.9);
 }
 
-/* Ensure the close icon/text is always visible */
-.lightbox-close .close-icon,
-.lightbox-close span {
-    color: white !important;
-    stroke: white !important;
-    fill: none;
+.lightbox-close-icon {
+    display: block;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--color-off-white, #f4f6f7);
 }
 
-/* Alternative: Enhanced SVG approach */
-.lightbox-close svg {
-    width: 24px;
-    height: 24px;
-    stroke: white !important;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: none;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
-}
-
+/* Image wrapper: fill modal content, center image */
 .lightbox-image-container {
     position: relative;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
-    min-width: 200px;
-    min-height: 200px;
+    padding: var(--spacing-md, 20px);
 }
 
+/* Loading spinner centered */
 .lightbox-loading {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    color: var(--color-off-white, #f4f6f7);
     z-index: 1;
-    color: white;
 }
 
+/* --- ENSURE IMAGE CONTAINS TO VIEWPORT --- */
 .lightbox-image {
+    max-height: 90vh;
     max-width: 100%;
-    max-height: 100%;
-    width: auto;
     height: auto;
+    width: auto;
     object-fit: contain;
-    border-radius: 8px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+    border-radius: var(--radius-md, 8px);
+    box-shadow: var(--shadow-xl, 0 20px 25px rgba(0, 0, 0, 0.2));
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--transition-default, 0.3s ease) var(--animation-easing, ease-out);
     display: block;
+    cursor: zoom-out;
 }
 
 .lightbox-image.loaded {
     opacity: 1;
 }
 
+/* Override Next.js Image default styles for lightbox */
+.lightbox-image img {
+    position: static !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+}
+
+/* Caption bar at bottom */
 .lightbox-caption {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    color: white;
-    padding: 2rem 1rem 1rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    color: var(--color-off-white, #f4f6f7);
+    padding: var(--spacing-md, 20px) var(--spacing-sm, 12px) var(--spacing-sm, 12px);
     text-align: center;
-    font-size: 1rem;
+    font-size: var(--font-size-small, 0.875rem);
     font-weight: 500;
-    border-radius: 0 0 8px 8px;
-    backdrop-filter: blur(4px);
+    border-radius: 0 0 var(--radius-md, 8px) var(--radius-md, 8px);
+    backdrop-filter: blur(8px);
+    max-height: 30%;
+    overflow-y: auto;
+    line-height: var(--line-height-small, 1.5);
 }
 
-/* Mobile responsive lightbox */
+/* Loading spinner styles */
+.loading-spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--color-light-grey, #e5e7eb);
+    border-top: 2px solid var(--color-accent, #2563eb);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translateZ(0);
+}
+
+.loading-spinner.large {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+}
+
+/* Mobile override to force scaling better */
 @media (max-width: 768px) {
-    .lightbox-close {
-        width: 44px;
-        height: 44px;
-        top: 0.75rem;
-        right: 0.75rem;
-        font-size: 20px;
+    .lightbox-overlay {
+        padding: 0;
+        /* Ensure no padding on mobile */
     }
 
     .lightbox-content {
-        width: 95vw;
-        height: 95vh;
-        border-radius: 8px;
+        max-height: calc(100vh - var(--spacing-md, 20px));
+        width: 100vw;
+    }
+
+    .lightbox-image {
+        max-height: 85vh;
+        width: 100%;
+    }
+
+    .lightbox-close {
+        top: var(--spacing-xs, 8px);
+        right: var(--spacing-xs, 8px);
+        width: 40px;
+        height: 40px;
+        font-size: var(--font-size-body, 1rem);
+    }
+
+    .lightbox-image-container {
+        padding: var(--spacing-sm, 12px);
     }
 
     .lightbox-caption {
-        padding: 1.5rem 0.75rem 0.75rem;
-        font-size: 0.875rem;
+        font-size: var(--font-size-caption, 0.875rem);
+        padding: var(--spacing-sm, 12px) var(--spacing-xs, 8px) var(--spacing-xs, 8px);
     }
 }
 
 @media (max-width: 480px) {
-    .lightbox-close {
-        width: 40px;
-        height: 40px;
-        top: 0.5rem;
-        right: 0.5rem;
-        font-size: 18px;
-    }
-
-    .lightbox-overlay {
-        padding: 0.5rem;
-    }
-
     .lightbox-content {
-        width: 100vw;
-        height: 100vh;
-        border-radius: 0;
+        max-height: calc(100vh - var(--spacing-sm, 12px));
+    }
+
+    .lightbox-image {
+        max-height: 80vh;
+    }
+
+    .lightbox-close {
+        width: 36px;
+        height: 36px;
+        font-size: var(--font-size-small, 0.875rem);
+    }
+
+    .lightbox-image-container {
+        padding: var(--spacing-xs, 8px);
+    }
+
+    .lightbox-caption {
+        font-size: var(--font-size-xsm, 0.75rem);
     }
 }
 
-/* Dark mode enhancements */
+/* Dark mode support */
 @media (prefers-color-scheme: dark) {
     .lightbox-overlay {
-        background: rgba(0, 0, 0, 0.95);
+        background: rgba(0, 0, 0, 0.98);
     }
 
     .lightbox-close {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.3);
+        background: rgba(20, 20, 20, 0.9);
+        border-color: rgba(255, 255, 255, 0.2);
     }
 
     .lightbox-close:hover {
-        background: rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.5);
+        background: rgba(40, 40, 40, 0.95);
+    }
+
+    .lightbox-caption {
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
     }
 }
 
 /* High contrast mode */
 @media (prefers-contrast: high) {
     .lightbox-close {
-        background: black;
-        border: 3px solid white;
-        color: white !important;
+        background: rgba(0, 0, 0, 1);
+        border: 3px solid rgba(255, 255, 255, 1);
     }
 
-    .lightbox-close:hover {
-        background: white;
-        color: black !important;
+    .lightbox-close:focus {
+        outline: 3px solid var(--color-off-white, #ffffff);
+        outline-offset: 2px;
+    }
+
+    .lightbox-image {
+        border: 2px solid rgba(255, 255, 255, 0.5);
     }
 }
 
-/* Reduced motion */
+/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
 
     .lightbox-overlay,
     .lightbox-content,
-    .lightbox-close {
-        animation: none;
-        transition: none;
+    .lightbox-close,
+    .lightbox-image {
+        animation: none !important;
+        transition: none !important;
     }
 
     .lightbox-close:hover {
         transform: none;
     }
+
+    .lightbox-image.loaded {
+        opacity: 1;
+    }
 }
 
+/* Performance optimizations */
+.lightbox-overlay {
+    contain: layout style;
+    will-change: opacity;
+}
+
+.lightbox-content {
+    contain: layout style paint;
+    will-change: transform;
+}
+
+.lightbox-close {
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+}
+
+.lightbox-image {
+    will-change: opacity;
+    backface-visibility: hidden;
+}
+
+/* Print styles */
+@media print {
+
+    .lightbox-overlay,
+    .lightbox-content,
+    .lightbox-close,
+    .lightbox-caption {
+        display: none !important;
+    }
+}
+
+/* Accessibility improvements */
+.lightbox-close:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.lightbox-close:focus-visible {
+    outline: var(--focus-outline-width, 2px) solid var(--focus-outline-color, #3b82f6);
+    outline-offset: var(--focus-outline-offset, 2px);
+}
+
+/* Smooth scrolling for caption */
+.lightbox-caption {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for caption */
+.lightbox-caption::-webkit-scrollbar {
+    width: 4px;
+}
+
+.lightbox-caption::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.lightbox-caption::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+}
+
+.lightbox-caption::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Keyframes for animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -658,11 +832,38 @@
 @keyframes scaleIn {
     from {
         opacity: 0;
-        transform: scale(0.9);
+        transform: scale(0.95);
     }
 
     to {
         opacity: 1;
         transform: scale(1);
     }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Focus trap for better accessibility */
+.lightbox-overlay:focus-within {
+    outline: none;
+}
+
+/* --- OPTIONAL DEBUG OVERLAY (remove after testing) --- */
+
+.lightbox-overlay {
+    outline: 2px solid red;
+}
+.lightbox-content {
+    outline: 2px dashed lime;
+}
+.lightbox-image {
+    outline: 1px solid blue;
 }

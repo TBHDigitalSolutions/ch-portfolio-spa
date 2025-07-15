@@ -1,37 +1,34 @@
-// src/lib/hooks/useIntersectionObserver.ts
-import { useEffect } from "react";
+// src/lib/hooks/useIntersectionObserver.ts - Fixed dependency issue
+import { useEffect, useMemo, useState } from 'react';
 
-export type IntersectionObserverOptions = IntersectionObserverInit;
+interface UseIntersectionObserverOptions extends IntersectionObserverInit {
+  freezeOnceVisible?: boolean;
+}
 
-/**
- * useIntersectionObserver
- * Fires a callback when the target element enters or leaves the viewport.
- *
- * @param ref React ref object pointing to the target DOM element
- * @param callback Function called on each IntersectionObserverEntry
- * @param options IntersectionObserverInit (root, rootMargin, threshold)
- */
-export default function useIntersectionObserver(
-  ref: React.RefObject<Element> | React.MutableRefObject<Element | null>,
-  callback: (entry: IntersectionObserverEntry, observer: IntersectionObserver) => void,
-  options: IntersectionObserverOptions = { root: null, rootMargin: "0px", threshold: 0 }
-): void {
+export function useIntersectionObserver(
+  elementRef: React.RefObject<Element>,
+  options: UseIntersectionObserverOptions = {}
+): IntersectionObserverEntry | undefined {
+  const { freezeOnceVisible = false, ...observerOptions } = options;
+  const [entry, setEntry] = useState<IntersectionObserverEntry>();
+
+  const frozen = entry?.isIntersecting && freezeOnceVisible;
+
+  // ✅ FIXED: Only include observerOptions, remove specific property dependencies
+  const observer = useMemo(() => {
+    if (typeof window === 'undefined') return null;
+    
+    return new IntersectionObserver(([entry]) => setEntry(entry), observerOptions);
+  }, [observerOptions]);
+
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const element = ref.current;
-    if (!element) return;
-
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach((entry) => {
-        callback(entry, obs);
-      });
-    }, options);
+    const element = elementRef.current;
+    if (!element || frozen || !observer) return;
 
     observer.observe(element);
 
-    return () => {
-      observer.disconnect();
-    };
-  // We include options as string to avoid deep compare issues
-  }, [ref, callback, JSON.stringify(options)]);
+    return () => observer.unobserve(element);
+  }, [elementRef, frozen, observer]);
+
+  return entry;
 }

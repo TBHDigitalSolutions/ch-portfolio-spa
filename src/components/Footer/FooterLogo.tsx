@@ -2,6 +2,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import './footerlogo.css';
 
 interface FooterLogoProps {
@@ -25,9 +26,11 @@ export default function FooterLogo({
       className="footer-logo-link"
       aria-label={`${text} - Opens in new tab`}
     >
-      <img 
+      <Image 
         src={logoPath} 
         alt={logoAlt} 
+        width={24}
+        height={24}
         className="footer-logo-img"
         loading="lazy"
       />

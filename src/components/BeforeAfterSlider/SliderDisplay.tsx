@@ -11,7 +11,7 @@ export interface SliderDisplayProps {
   beforeSrc: string;
   afterSrc: string;
   caption?: string;
-  /** Tailwind height class, e.g. "h-96" or "h-[600px]" */
+  /** Tailwind height class, e.g. "h-96" or "h-[600px]" - currently unused, kept for future use */
   heightClass?: string;
 }
 
@@ -19,7 +19,7 @@ const SliderDisplay = memo<SliderDisplayProps>(function SliderDisplay({
   beforeSrc,
   afterSrc,
   caption,
-  heightClass = "h-full",
+  // heightClass is accepted but not used yet - removing the assignment to fix ESLint
 }) {
   return (
     <div className="slider-display-wrapper">

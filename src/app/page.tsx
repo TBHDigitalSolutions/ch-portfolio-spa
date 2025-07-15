@@ -1,7 +1,7 @@
 // src/app/page.tsx
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Element } from 'react-scroll';
 import dynamic from 'next/dynamic';
 
@@ -11,6 +11,7 @@ import MediaShowcase from '@/components/MediaShowcase';
 import VideoGrid from '@/components/VideoGrid';
 import ImageGrid from '@/components/ImageGrid';
 import Divider from '@/components/Base/SectionDivider/Divider';
+import type { ImageItem, ImageSize } from '@/components/ImageGrid/types';
 
 // Dynamically import PDFGallery to prevent SSR issues
 const PDFGallery = dynamic(() => import('@/components/PDFGallery'), {
@@ -33,6 +34,22 @@ import imageGridData from '@/data/media/imageGrid.json';
 import imageGridRationale from '@/data/content/imageGridRationale.json';
 
 export default function Home() {
+  // Process imageGridData to ensure type safety
+  const processedImageGridData = useMemo(() => {
+    const validSizes: ImageSize[] = ['small', 'medium', 'large', 'wide', 'tall'];
+    
+    return imageGridData.map((item): ImageItem => ({
+      id: item.id,
+      src: item.src,
+      alt: item.alt,
+      caption: item.caption,
+      size: validSizes.includes(item.size as ImageSize) 
+        ? (item.size as ImageSize)
+        : undefined,
+      priority: item.priority
+    }));
+  }, []);
+
   return (
     <div className="max-w-6xl mx-auto px-4">
       {/* About & Skills Section */}
@@ -88,7 +105,7 @@ export default function Home() {
       <Element name="image-gallery" className="section-anchor" id="image-gallery">
         <section className="py-16 scroll-mt-24">
           <ImageGrid
-            images={imageGridData}
+            images={processedImageGridData}
             rationaleData={imageGridRationale}
           />
         </section>

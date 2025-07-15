@@ -6,15 +6,17 @@ import VideoGridList from './VideoGrid';
 import VideoPlayer from './VideoPlayer';
 import { sanitizeCaption } from '@/lib/utils/formatCaption';
 import { SectionRationaleGrid, SectionRationaleGridProps } from '@/components/SectionRationale';
+import videoGridRationale from '@/data/content/videoGridRationale.json';
 import './videogrid.css';
 
+// ✅ FIXED: Make category type more flexible to match JSON data
 export interface VideoItem {
   id: string;
   src?: string;
   url?: string;
   title: string;
   thumbnail: string;
-  category?: 'Corporate' | 'Creative' | 'Comedy'; // Add category field
+  category?: string; // ✅ CHANGED: from 'Corporate' | 'Creative' | 'Comedy' to string
 }
 
 export interface VideoGridData {
@@ -70,11 +72,8 @@ export default function VideoGrid({
                 </div>
                 <VideoPlayer
                   src={corporateSelected.src ?? corporateSelected.url!}
-                  poster={corporateSelected.thumbnail}
-                  alt={corporateSelected.title}
-                  autoPlay={false}
-                  loop={false}
-                  muted={false}
+                  title={corporateSelected.title}
+                  className="video-player-main"
                 />
               </>
             )}
@@ -86,6 +85,15 @@ export default function VideoGrid({
       <div className="video-section creative-section">
         <h3 className="section-title">Creative Videos</h3>
         <div className="video-section-content creative-layout">
+          <aside className="video-grid-sidebar">
+            <VideoGridList
+              items={data.creative}
+              selectedId={creativeSelected?.id}
+              onSelect={setCreativeSelected}
+              variant="sidebar"
+            />
+          </aside>
+
           <main className="video-player-area">
             {creativeSelected && (
               <>
@@ -96,24 +104,12 @@ export default function VideoGrid({
                 </div>
                 <VideoPlayer
                   src={creativeSelected.src ?? creativeSelected.url!}
-                  poster={creativeSelected.thumbnail}
-                  alt={creativeSelected.title}
-                  autoPlay={false}
-                  loop={false}
-                  muted={false}
+                  title={creativeSelected.title}
+                  className="video-player-main"
                 />
               </>
             )}
           </main>
-
-          <aside className="video-grid-sidebar">
-            <VideoGridList
-              items={data.creative}
-              selectedId={creativeSelected?.id}
-              onSelect={setCreativeSelected}
-              variant="sidebar"
-            />
-          </aside>
         </div>
       </div>
     </section>
