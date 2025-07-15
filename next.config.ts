@@ -1,3 +1,5 @@
+// next.config.ts
+
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -59,11 +61,11 @@ const nextConfig: NextConfig = {
 
   // ✅ Webpack configuration for non-Turbopack builds
   webpack: (config, { dev, isServer }) => {
-    // Only apply webpack config when not using Turbopack
-    if (!process.env.TURBOPACK) {
-      // Optimize for portfolio assets
-      config.module.rules.push(
-        {
+  // Only apply webpack config when not using Turbopack
+  if (!process.env.TURBOPACK) {
+    // Optimize for portfolio assets
+    config.module.rules.push(
+      {
           test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)$/,
           type: 'asset/resource',
           generator: {
@@ -84,6 +86,14 @@ const nextConfig: NextConfig = {
         ...config.resolve.alias,
         'video.js': 'video.js/dist/video.min.js',
       };
+
+      // 🚨 Inject canvas fallback to avoid Vercel build errors
+      if (!isServer) {
+        config.resolve.fallback = {
+          ...config.resolve.fallback,
+          canvas: false,
+        };
+      }
 
       // Optimize for JSON data files
       config.module.rules.push({
