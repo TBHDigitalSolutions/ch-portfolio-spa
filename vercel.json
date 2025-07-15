@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.content-portfolio.conorhovis.com"
+        }
+      ],
+      "destination": "https://content-portfolio.conorhovis.com",
+      "permanent": true
+    }
+  ]
+}
